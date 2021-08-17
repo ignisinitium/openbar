@@ -42,6 +42,13 @@ class motion()
     supportingEvidence
     brief()
 
-    
+
+class smartDoc()                #this class will make a document with smart locations that get populated with the spefice use case information. Basicly a templet
+    def self.document = document
+    def self.details[]          #details shows the location in the documnent that needs user input, and then a discription for the user input.
+
+
+
+
 
 
