@@ -1,4 +1,6 @@
 #copyright Jonathan David Deak
+#This codebase will server as the backend for tearsforprofit.com
+#an organitation to remove all profit from justice.
 #code may be used for non comercial uses.
 Any commercial use shall pay 10% of all earnings befor taxes or any deduction to Jonathan David Deak in royalties.
 
@@ -35,7 +37,7 @@ class userProgress
     possibleMotions
 
 class motion()
-    modified
+    modify
     petition
     dissmiss
     useCase []
@@ -49,6 +51,11 @@ class smartDoc()                #this class will make a document with smart loca
 
 
 
+
+#attorny fees
+#sancations
+#lost time
+#expensises
 
 
 
