@@ -36,13 +36,11 @@ class userProgress
     pendingMotions
     possibleMotions
 
-class motion()
-    modify
-    petition
-    dissmiss
-    useCase []
-    supportingEvidence
-    brief()
+class filing()
+    filingType = #motion petition anything submitted to another party
+    fillingIdentifier =
+    location = location #Place of orignal filing ex:court police or other agency
+    filing() =
 
 
 class smartDoc()                #this class will make a document with smart locations that get populated with the spefice use case information. Basicly a templet
@@ -51,11 +49,16 @@ class smartDoc()                #this class will make a document with smart loca
 
 
 
-
+#listing all motions
 #attorny fees
 #sancations
 #lost time
 #expensises
+#gal
+#
+#have a calendar to track important dates, deadlines, expensis, lost or make up time.
+#have an API
+
 
 
 
