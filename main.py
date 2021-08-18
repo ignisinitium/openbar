@@ -1,8 +1,8 @@
-#copyright Jonathan David Deak
+#copyright Jonathan David Deak ignisinitium@icloud.com
 #This codebase will server as the backend for tearsforprofit.com
 #an organitation to remove all profit from justice.
 #code may be used for non comercial uses.
-Any commercial use shall pay 10% of all earnings befor taxes or any deduction to Jonathan David Deak in royalties.
+#Any commercial use shall pay 10% of all earnings befor taxes or any deduction to Jonathan David Deak as royalties.
 
 
 class law(self, state)
