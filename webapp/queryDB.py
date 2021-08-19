@@ -7,7 +7,7 @@ cursor = cnx.cursor()
 query = ("SELECT first_name, last_name, hire_date FROM employees "
          "WHERE hire_date BETWEEN %s AND %s")
 
-hire_start = datetime.date(1999, 1, 1)
+hire_start = datetime.date(1970, 1, 1)
 hire_end = datetime.date(1999, 12, 31)
 
 cursor.execute(query, (hire_start, hire_end))
