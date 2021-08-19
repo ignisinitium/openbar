@@ -3,6 +3,7 @@
 #an organitation to remove all profit from justice.
 #code may be used for non commercial uses.
 #Any commercial use shall pay 10% of all earnings before taxes or any deduction to Jonathan David Deak as royalties.
+#More
 
 
 #class law(self, state)
