@@ -11,7 +11,7 @@ from mysql.connector import errorcode
 DB_NAME = 'tearsfor_openBar'
 
 TABLES = {}
-TABLES['users'] = (
+TABLES['tearsfor_openBar'] = (
     "CREATE TABLE `users` ("
     "  `user_no` int(11) NOT NULL AUTO_INCREMENT,"
     "  `birth_date` date NOT NULL,"
