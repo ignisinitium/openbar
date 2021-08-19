@@ -1,13 +1,13 @@
 #copyright Jonathan David Deak ignisinitium@icloud.com
 #This codebase will server as the backend for tearsforprofit.com
 #an organitation to remove all profit from justice.
-#code may be used for non comercial uses.
-#Any commercial use shall pay 10% of all earnings befor taxes or any deduction to Jonathan David Deak as royalties.
+#code may be used for non commercial uses.
+#Any commercial use shall pay 10% of all earnings before taxes or any deduction to Jonathan David Deak as royalties.
 
 
-class law(self, state)
-    def __init__ self.state = state
-    def self.courtOpinions = courtOpinions[]
+#class law(self, state)
+#    def __init__ self.state = state
+#    def self.courtOpinions = courtOpinions[]
 
 
 class courtOpinion()
@@ -26,9 +26,9 @@ class user
 class problemSolver
 
 
+class haveIExhaustedAllPossibleRemidies   #this will check a users state to see if they have done everything currently avalible to them in order to win.
 
 
-problems
 
 
 class userProgress
@@ -48,6 +48,9 @@ class smartDoc()                #this class will make a document with smart loca
     def self.details[]          #details shows the location in the documnent that needs user input, and then a discription for the user input.
 
 
+class event() #an event that will need to be preformed ex: trial, deposition, -where a plan will need to be laid out
+
+
 
 #listing all motions
 #attorny fees
@@ -62,3 +65,18 @@ class smartDoc()                #this class will make a document with smart loca
 
 
 
+#Birth Certificate
+#Family Bible
+#Petition for paterntity
+#Petition for custody
+#discovery
+#   Asking for discovery
+#   Answering Discovery
+#       use AI to scan each discovery question to determin if it should be answered.
+#depositions
+#partner leaving
+#partner asking you to leave
+#physical abuse
+#emotion abuse
+#finantual abuse
+#
