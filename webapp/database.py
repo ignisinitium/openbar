@@ -1,8 +1,8 @@
 import mysql.connector
 
-cnx = mysql.connector.connect(user='test', password='P@s$w0rd123!',
+cnx = mysql.connector.connect(user='tearsfor_openBar', password='574?OB!MYSQL$Pa55',
                               host='127.0.0.1',
-                              database='openBar')
+                              database='tearsfor_openBar')
 cnx.close()
 
 from __future__ import print_function
