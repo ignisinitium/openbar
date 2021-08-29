@@ -7,10 +7,10 @@ the documents for each motion per the users request.
 
 Please use the stripe links below to give monthy or the 
 gofund me for a one time gift.
-https://www.gofundme.com/f/help-me-take-the-profit-out-of-justice
-Bitcoin 39BF3EhPCc3ZfEHoKYXGF8se28sCJiR2ux
-Ethereum 0x3228B97Df5F374F79B0e0F6d4C658384CdBB5d04
-Litecoin MEnuKkq3uwiT5pwrFaHhhPFggeA9Gegd4L
+https://www.gofundme.com/f/help-me-take-the-profit-out-of-justice       
+Bitcoin 39BF3EhPCc3ZfEHoKYXGF8se28sCJiR2ux      
+Ethereum 0x3228B97Df5F374F79B0e0F6d4C658384CdBB5d04     
+Litecoin MEnuKkq3uwiT5pwrFaHhhPFggeA9Gegd4L     
 
  
 https://buy.stripe.com/7sIbJy8jQa2r0YE7ss $5 per month       
