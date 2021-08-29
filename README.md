@@ -5,7 +5,10 @@ It will then show the user all possible motions
 from their currant position in court and create 
 the documents for each motion per the users request. 
 
-Please use the links below to give monthy.
+Please use the stripe links below to give monthy or the 
+gofund me for a one time gift.
+https://www.gofundme.com/f/help-me-take-the-profit-out-of-justice
+
 
  
 https://buy.stripe.com/7sIbJy8jQa2r0YE7ss $5 per month       
