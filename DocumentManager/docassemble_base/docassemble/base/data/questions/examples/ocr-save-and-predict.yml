@@ -1,0 +1,56 @@
+metadata:
+  title: OCR machine learning
+  short title: OCR machine learning
+  example start: 1
+  example end: 8
+  documentation: "https://docassemble.org/docs/functions.html#ocr_file"
+---
+mandatory: True
+code: |
+  the_file.set_attributes(persistent=True)
+---
+mandatory: True
+code: |
+  the_task
+  if not the_task.ready():
+    waiting_screen
+  ml = SimpleTextMachineLearner(group_id='ocr_ai')
+  ml.save_for_classification(phrase, info=the_file)
+  predictions = ml.predict(phrase)
+---
+question: |
+  Please upload or take a
+  picture of your legal document.
+fields:
+  - no label: the_file
+    datatype: file
+---
+code: |
+  the_task = background_action('ocr_start', None)
+---
+event: ocr_start
+code: |
+  background_response_action('ocr_finish', text=ocr_file(the_file))
+---
+event: ocr_finish
+code: |
+  phrase = action_argument('text')
+  background_response()
+---
+event: waiting_screen
+reload: 5
+question: |
+  Please wait.
+---
+mandatory: True
+question: |
+  Your document
+subquestion: |
+  % if len(predictions):
+  Your document is a ${ predictions[0] }.
+  % else:
+  There is not enough training data
+  to make a prediction yet.
+  % endif
+buttons:
+  - Restart: restart

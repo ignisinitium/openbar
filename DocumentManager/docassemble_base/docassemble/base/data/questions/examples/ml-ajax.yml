@@ -1,0 +1,49 @@
+metadata:
+  title: Suggestions
+  short title: Suggestions
+  documentation: "https://docassemble.org/docs/ml.html"
+---
+features:
+  javascript: suggestions.js
+---
+initial: True
+code: |
+  process_action()
+---
+question: |
+  Describe your legal problem.
+fields:
+  - no label: phrase
+    input type: area
+  - html: '<div id="fromserver"></div>'
+---
+mandatory: True
+code: |
+  ml = SimpleTextMachineLearner(group_id='sug')
+---
+code: |
+  ml.save_for_classification(phrase)
+  saved = True
+---
+mandatory: True
+code: |
+  while saved:
+    del phrase
+    del saved
+---
+mandatory: True
+question: |
+  Thank you.
+buttons:
+  - Restart: restart
+---
+event: predict
+code: |
+  ml = SimpleTextMachineLearner(group_id='sug')
+  if len(action_argument('inputstring')) > 3:
+    predictions = ' '.join(map(lambda x: '<a class="btn btn-info btn-md">' + str(x) + '</a>', ml.predict(action_argument('inputstring'))))
+    if predictions:
+      predictions = "<p>Possible legal topics:</p><p>" + predictions + "</p>"
+  else:
+    predictions = ''
+  json_response({'suggestions': predictions})

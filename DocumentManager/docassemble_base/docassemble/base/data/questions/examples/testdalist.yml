@@ -1,0 +1,42 @@
+metadata:
+  title: DAList
+  documentation: "https://docassemble.org/docs/objects.html"
+  example start: 1
+  example end: 5
+---
+objects:
+  - recipient: DAList
+  - trustee: Individual
+  - beneficiary: Individual
+  - grantor: Individual
+---
+mandatory: True
+code: |
+  recipient.clear()
+  recipient.append(trustee)
+  recipient.append(beneficiary)
+  recipient.append(grantor)
+  recipient.appendObject(Individual)
+  recipient.appendObject(Individual)
+  recipient.gathered = True
+---
+mandatory: True
+question: The recipients
+subquestion: |
+  % for person in recipient:
+  ${ person } is a recipient.
+  % endfor
+---
+generic object: Individual
+question: |
+  What is the name of the ${ x.object_name() }?
+fields:
+  - First Name: x.name.first
+  - Last Name: x.name.last
+---
+generic object: Individual
+question: |
+  The ${ ordinal(i) } ${ x.object_name() } must have a name.  What is it?
+fields:
+  - First Name: x[i].name.first
+  - Last Name: x[i].name.last

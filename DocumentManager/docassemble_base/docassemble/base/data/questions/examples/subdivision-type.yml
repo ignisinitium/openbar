@@ -1,0 +1,14 @@
+metadata:
+  title: Subdivision type
+  documentation: "https://docassemble.org/docs/functions.html#subdivision_type"
+---
+mandatory: True
+question: |
+  Geography lesson
+subquestion: |
+  % for country in ['BG', 'SE', 'TN', 'VN', 'LV', 'US']:
+  In ${ country_name(country) },
+  you live in a
+  ${ subdivision_type(country) }.
+  
+  % endfor

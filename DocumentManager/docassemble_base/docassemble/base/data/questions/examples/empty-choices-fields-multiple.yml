@@ -1,0 +1,44 @@
+metadata:
+  title: Empty choices list in fields
+  short title: Choices
+  example start: 1
+  example end: 3
+  documentation: "https://docassemble.org/docs/fields.html#code"
+---
+code: |
+  if choices_should_be_empty:
+    the_doors = []
+    the_buckets = []
+  else:
+    the_doors = ["Door Number 1", "Door Number 2"]
+    the_buckets = ["Green Bucket", "Red Bucket"]
+---
+question: |
+  What do you choose?
+fields:
+  - no label: door
+    datatype: radio
+    code: the_doors
+  - no label: bucket
+    datatype: radio
+    code: the_buckets
+---
+mandatory: true
+question: |
+  % if door is None:
+  There were no choices available.
+  % else:
+  You chose ${ door }.
+  You chose ${ bucket }.
+  % endif
+subquestion: |
+  `door` is `${ door }`.
+
+  `bucket` is `${ bucket }`.
+buttons:
+  - Restart: restart
+---
+question: |
+  Should the list of choices for the
+  `radio` field be empty?
+yesno: choices_should_be_empty

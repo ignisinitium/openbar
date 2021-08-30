@@ -1,0 +1,26 @@
+metadata:
+  title: "List: gather with minimum number"
+  short title: "List: minimum number"
+  documentation: "https://docassemble.org/docs/groups.html#gathering"
+  example start: 1
+  example end: 1
+---
+objects:
+  - fruit: DAList.using(minimum_number=2)
+---
+question: |
+  What is the ${ ordinal(i) } fruit?
+fields:
+  - Fruit: fruit[i]
+---
+question: |
+  So far, the fruits include ${ fruit }.
+  Are there any others?
+yesno: fruit.there_is_another
+---
+mandatory: True
+question: |
+  There are ${ fruit.number_as_word() }
+  fruits in all.
+subquestion: |
+  The fruits are ${ fruit }.

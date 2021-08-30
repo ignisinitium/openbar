@@ -1,0 +1,20 @@
+metadata:
+  title: Images with attribution
+  documentation: "https://docassemble.org/docs/initial.html#image sets"
+---
+image sets:
+  freepik:
+    attribution: |
+      Icon made by
+      [Freepik](http://www.flaticon.com/authors/freepik)
+    images:
+      baby: crawling.svg
+      money: commerce.svg
+---
+decoration: money 
+question: |
+  Money is important.
+subquestion: |
+  And if you have a :baby: you will need
+  a lot of it.
+mandatory: True

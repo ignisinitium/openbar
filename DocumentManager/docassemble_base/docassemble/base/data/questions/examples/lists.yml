@@ -1,0 +1,20 @@
+metadata:
+  title: Lists
+  example start: 2
+  example end: 3
+  documentation: "https://docassemble.org/docs/functions.html#comma_and_list"
+---
+objects:
+  fears: DAList
+---
+mandatory: True
+code: |
+  fears.extend(['spiders', 'snakes', 'fish'])
+  fears.gathered = True
+---
+mandatory: True
+question: |
+  Your fears
+subquestion: |
+  You are afraid of
+  ${ comma_and_list(fears) }.

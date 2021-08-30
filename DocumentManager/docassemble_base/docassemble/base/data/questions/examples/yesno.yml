@@ -1,0 +1,12 @@
+metadata:
+  title: Yes/no
+  documentation: "https://docassemble.org/docs/fields.html#yesno"
+---
+question: |
+  Are you at least 18 years of age?
+yesno: over_eighteen
+---
+question: Result of question
+subquestion: |
+  over_eighteen is: "${ over_eighteen }"
+mandatory: True

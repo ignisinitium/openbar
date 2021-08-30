@@ -1,0 +1,22 @@
+metadata:
+  title: Progress meter
+  example start: 1
+  example end: 3
+  documentation: "https://docassemble.org/docs/initial.html#progress bar"
+---
+features:
+  progress bar: True
+---
+question: Are you doing well?
+yesno: user_is_well
+progress: 20
+---
+question: Done with the interview.
+subquestion: |
+  % if user_is_well:
+  I am glad you are doing well.
+  % else:
+  I am sorry to hear that!
+  % endif
+progress: 100
+mandatory: True

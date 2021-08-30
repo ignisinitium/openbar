@@ -1,0 +1,46 @@
+metadata:
+  title: generic objects
+  documentation: "https://docassemble.org/docs/modifiers.html#generic object"
+  example start: 1
+  example end: 2
+---
+objects:
+  - grantor: Individual
+  - grantee: Individual
+  - trustee: Individual
+---
+generic object: Individual
+question: |
+  What is
+  ${ x.object_possessive('name') }?
+fields:
+  - First Name: x.name.first
+    default: ${ x.first_name_hint() }
+  - Middle Name: x.name.middle
+    required: False
+  - Last Name: x.name.last
+    default: ${ x.last_name_hint() }
+  - Suffix: x.name.suffix
+    required: False
+    code: |
+      name_suffix()
+---
+generic object: Individual
+question: |
+  What is
+  ${ x.possessive('phone number') }?
+fields:
+  Phone Number: x.phone_number
+---
+mandatory: True
+question: |
+  How to reach people
+subquestion: |
+  You can reach the grantor
+  at ${ grantor.phone_number }.
+
+  You can reach the grantee
+  at ${ grantee.phone_number }.
+
+  You can reach the trustee
+  at ${ trustee.phone_number }.

@@ -1,0 +1,19 @@
+metadata:
+  title: Age of Individual
+  documentation: "https://docassemble.org/docs/objects.html#Individual.age_in_years"
+  example start: 2
+  example end: 3
+---
+objects:
+  - user: Individual
+---
+question: |
+  What is your date of birth?
+fields:
+  - no label: user.birthdate
+    datatype: date
+---
+question: |
+  You are ${ user.age_in_years() }
+  years old.
+mandatory: True

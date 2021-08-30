@@ -1,0 +1,16 @@
+metadata:
+  title: Continue button
+  documentation: "https://docassemble.org/docs/fields.html#field"
+---
+continue button field: target_variable
+question: |
+  Welcome to the interview.
+subquestion: |
+  When you are ready to begin, press
+  Continue.
+---
+question: Result of question
+subquestion: |
+  target_variable is:
+  "${ target_variable }"
+mandatory: True

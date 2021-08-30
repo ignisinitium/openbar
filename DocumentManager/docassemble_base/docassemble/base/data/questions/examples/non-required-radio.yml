@@ -1,0 +1,25 @@
+metadata:
+  title: Non-required radio buttons
+  short title: Non-required
+  documentation: "https://docassemble.org/docs/fields.html#fields yesnoradio"
+---
+question: |
+  Please provide the following information.
+fields:
+  - "Do you like apricots?": likes_apricots
+    datatype: yesnoradio
+  - "Which of these do you like best?": fruit_favorite
+    datatype: radio
+    required: false
+    choices:
+      - Apples
+      - Oranges
+      - Peaches
+---
+question: |
+  Thank you for that information.
+subquestion: |
+  `likes_apricots` is ${ likes_apricots }.
+
+  `fruit_favorites` is ${ fruit_favorite }.
+mandatory: True

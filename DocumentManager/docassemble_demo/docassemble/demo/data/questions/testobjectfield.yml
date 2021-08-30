@@ -1,0 +1,20 @@
+---
+include: basic-questions.yml
+---
+question: Who is the villain?
+fields:
+  no label: villain
+  datatype: object
+  default: client
+  choices:
+    - client
+    - advocate
+---
+question: |
+  The villain, ${ villain }, was born on
+  ${ format_date(villain.birthdate) }.
+sets: all_done
+---
+mandatory: True
+code: all_done
+---

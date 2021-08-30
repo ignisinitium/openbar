@@ -1,0 +1,18 @@
+metadata:
+  title: Import Python module
+  documentation: "https://docassemble.org/docs/initial.html#imports"
+---
+imports:
+  - re
+---
+question: |
+  Please write a sentence.
+fields:
+  - no label: sentence
+    input type: area
+---
+mandatory: True
+question: |
+  Here is your transformed sentence.
+subquestion: |
+  > ${ re.sub(r' (the|a|an|to|by|for) ', ' AARGH! ', sentence) }

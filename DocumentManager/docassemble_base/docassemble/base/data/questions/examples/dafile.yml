@@ -1,0 +1,25 @@
+metadata:
+  title: Create file with code
+  example start: 1
+  example end: 4
+  documentation: "https://docassemble.org/docs/objects.html#DAFile"
+---
+imports:
+  - PIL
+---
+objects:
+  - myfile: DAFile
+---
+mandatory: True
+code: |
+  myfile.initialize(filename="foo.jpg")
+  im = PIL.Image.new("RGB",
+                     (512, 512),
+                     "green")
+  im.save(myfile.path())
+---
+mandatory: True
+question: |
+  Here is the picture.
+subquestion: |
+  ${ myfile }

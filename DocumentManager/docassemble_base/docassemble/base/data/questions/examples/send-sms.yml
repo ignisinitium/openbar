@@ -1,0 +1,36 @@
+metadata:
+  title: Send SMS message
+  documentation: "https://docassemble.org/docs/functions.html#send_sms"
+---
+objects:
+  client: Individual
+---
+template: my_message
+content: |
+  Hello, world!
+---
+question: |
+  What is your phone number?
+fields:
+  - Number: client.phone_number
+---
+question: |
+  Please upload a file
+fields:
+  - File: the_file
+    datatype: file
+---
+code: |
+  client.name.first = "John"
+  client.name.last = "Doe"
+  message_sent = send_sms(to=client, template=my_message)
+---
+mandatory: True
+question: |
+  Result
+subquestion: |
+  % if message_sent:
+  The SMS message was sent.
+  % else:
+  There was a problem sending the SMS message.
+  % endif

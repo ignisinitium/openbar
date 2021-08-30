@@ -1,0 +1,42 @@
+metadata:
+  title: Return a value
+  example start: 1
+  example end: 6
+  documentation: "https://docassemble.org/docs/background.html#background_action"
+---
+mandatory: True
+code: |
+  the_task
+  if the_task.ready():
+    final_screen
+  else:
+    waiting_screen
+---
+code: |
+  the_task = background_action('bg_task', additional=value_to_add)
+---
+question: |
+  How much shall I add to 553?
+fields:
+  - Number: value_to_add
+    datatype: integer
+---
+event: bg_task
+code: |
+  # This is where time-consuming code
+  # would go.
+  background_response(553 + action_argument('additional'))
+---
+event: waiting_screen
+question: |
+  Hang tight.
+  Still waiting for an answer.
+subquestion: |
+  This screen will reload every
+  ten seconds until the answer
+  is available.
+reload: True
+---
+event: final_screen
+question: |
+  The answer is ${ the_task.get() }.

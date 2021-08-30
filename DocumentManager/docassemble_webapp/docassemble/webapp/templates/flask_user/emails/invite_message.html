@@ -1,0 +1,9 @@
+{% extends 'flask_user/emails/base_message.html' %}
+
+{% block message %}
+
+<p>{{ word('You have been invited to join') }} {{ app_name }}.</p>
+
+<p><a href="{{ accept_invite_link }}">{{ word('Register for an account on') }} {{ app_name }}</a></p>
+
+{% endblock %}

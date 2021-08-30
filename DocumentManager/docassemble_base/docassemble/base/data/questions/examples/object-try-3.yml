@@ -1,0 +1,23 @@
+metadata:
+  title: Setting variable to object
+  short title: Setting objects
+  example start: 1
+  example end: 4
+  documentation: "https://docassemble.org/docs/fields.html#objects"
+---
+include: basic-questions.yml
+---
+question: Who is the villain?
+fields:
+  no label: villain
+  datatype: object
+  default: client
+  choices:
+    - client
+    - advocate
+---
+question: |
+  The villain, ${ villain }, was
+  born on
+  ${ format_date(villain.birthdate) }.
+mandatory: True

@@ -1,0 +1,204 @@
+{
+  "fruit": [
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 2.0,
+        "width": 4.1
+      }
+    },
+    {
+      "dependent": "strawberry",
+      "independent": {
+        "color": "Red",
+        "round": false,
+        "seed location": "Outside",
+        "sweetness": 4.0,
+        "width": 1.5
+      }
+    },
+    {
+      "dependent": "banana",
+      "independent": {
+        "color": "Yellow",
+        "round": false,
+        "seed location": "Inside",
+        "sweetness": 1.0,
+        "width": 1.2
+      }
+    },
+    {
+      "dependent": "pear",
+      "independent": {
+        "color": "Yellow",
+        "round": false,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 2.9
+      }
+    },
+    {
+      "dependent": "peach",
+      "independent": {
+        "color": "Yellow",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 4.0,
+        "width": 4
+      }
+    },
+    {
+      "dependent": "grape",
+      "independent": {
+        "color": "Purple",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 0.5
+      }
+    },
+    {
+      "dependent": "banana",
+      "independent": {
+        "color": "Yellow",
+        "round": false,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 1.0
+      }
+    },
+    {
+      "dependent": "cantaloupe",
+      "independent": {
+        "color": "Yellow",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 4.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "orange",
+      "independent": {
+        "color": "Orange",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 4.0,
+        "width": 4.0
+      }
+    },
+    {
+      "dependent": "grapefruit",
+      "independent": {
+        "color": "Yellow",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 2.0,
+        "width": 6.6
+      }
+    },
+    {
+      "dependent": "banana",
+      "independent": {
+        "color": "Yellow",
+        "round": false,
+        "seed location": "Inside",
+        "sweetness": 2.0,
+        "width": 1.5
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Green",
+        "round": false,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 4.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": true,
+        "seed location": "Inside",
+        "sweetness": 3.0,
+        "width": 6.0
+      }
+    },
+    {
+      "dependent": "apple",
+      "independent": {
+        "color": "Red",
+        "round": false,
+        "seed location": "Inside",
+        "sweetness": 2.0,
+        "width": 4.0
+      }
+    }
+  ]
+}

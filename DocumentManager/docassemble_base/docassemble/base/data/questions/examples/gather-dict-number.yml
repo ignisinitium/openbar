@@ -1,0 +1,48 @@
+metadata:
+  title: "Dictionary: ask number"
+  short title: "Dictionary: ask number"
+  documentation: "https://docassemble.org/docs/groups.html#gathering"
+  example start: 1
+  example end: 5
+---
+objects:
+  - fruit: DADict
+---
+mandatory: True
+code: |
+  fruit.ask_number = True
+---
+mandatory: True
+question: |
+  There
+  ${ fruit.does_verb("is") }
+  ${ fruit.number_as_word() }
+  fruits in all.
+subquestion: |
+  % for item in fruit:
+  The fruit ${ item } has
+  ${ fruit[item] } seeds.
+  % endfor
+---
+question: |
+  How many fruit should be added
+  to the database?
+fields:
+  - Number: fruit.target_number
+    datatype: integer
+    min: 0
+---
+question: |
+  What fruit should be added to
+  the database?
+fields:
+  - Fruit: fruit.new_item_name
+---
+question: |
+  How many seeds does
+  ${ indefinite_article(noun_singular(i)) }
+  have?
+fields:
+  - Number of seeds: fruit[i]
+    datatype: integer
+    min: 0

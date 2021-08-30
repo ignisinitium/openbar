@@ -1,0 +1,31 @@
+metadata:
+  title: "List: gathering"
+  short title: "List: gathering"
+  documentation: "https://docassemble.org/docs/groups.html#gathering"
+  example start: 1
+  example end: 5
+---
+objects:
+  - fruit: DAList
+---
+mandatory: True
+question: |
+  There are ${ fruit.number_as_word() }
+  fruits in all.
+subquestion: |
+  The fruits are ${ fruit }.
+---
+question: |
+  Are there any fruit that you would like
+  to add to the list?
+yesno: fruit.there_are_any
+---
+question: |
+  What fruit should be added to the list?
+fields:
+  - Fruit: fruit[i]
+---
+question: |
+  So far, the fruits include ${ fruit }.
+  Are there any others?
+yesno: fruit.there_is_another

@@ -1,0 +1,28 @@
+metadata:
+  title: Curly quotes in Jinja2
+  short title: Curly
+  documentation: "https://docassemble.org/docs/documents.html#docx template file"
+  example start: 4
+  example end: 4
+---
+objects:
+  - favorite: DADict
+---
+question: |
+  What is your favorite fruit?
+fields:
+  - Fruit: favorite['fruit']
+---
+question: |
+  What is your favorite vegetable?
+fields:
+  - Vegetable: favorite['vegetable']
+---
+mandatory: True
+question: |
+  Here is your document.
+attachment:
+  - name: Fruit and vegetable summary
+    filename: fruit_vegetable
+    docx template file: quotes-in-code.docx
+  

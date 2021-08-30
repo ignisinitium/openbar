@@ -1,0 +1,31 @@
+metadata:
+  title: Disable back button
+  documentation: "https://docassemble.org/docs/functions.html#prevent_going_back"
+---
+code: |
+  app_submitted = True
+  prevent_going_back()
+---
+question: |
+  Your application for ${ service }
+  has been submitted.
+need: app_submitted
+field: first_screen_after
+mandatory: True
+---
+question: |
+  Your application will be carefully considered.
+field: second_screen_after
+mandatory: True
+---
+mandatory: True
+question: |
+  You will hear from us in six weeks.
+---
+question: |
+  For what service would you like
+  to apply?
+field: service
+choices:
+  - Tutoring
+  - Resume writing assistance

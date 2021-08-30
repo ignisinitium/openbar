@@ -1,0 +1,39 @@
+metadata:
+  title: Generic objects
+  documentation: "https://docassemble.org/docs/modifiers.html#generic object"
+---
+generic object: Individual
+question: |
+  What is ${ x.object_possessive('name') }?
+fields:
+  - First Name: x.name.first
+  - Last Name: x.name.last
+---
+modules:
+  - docassemble.base.legal
+---
+objects:
+  - user: Individual
+  - case: Case
+  - defendant: PartyList
+---
+initial: True
+code: |
+  set_info(user=user, role='client')
+---
+question: |
+  Thanks for the information
+sets: all_done
+---
+mandatory: True
+code: |
+  case.judge = Individual()
+  case.bailiff = Individual()
+---
+mandatory: True
+code: |
+  case.bailiff.name.first
+  case.judge.name.first
+  defendant[0].name.first
+  user.name.first
+  all_done

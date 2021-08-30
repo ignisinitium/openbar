@@ -1,0 +1,16 @@
+metadata:
+  title: Images without attribution
+  documentation: "https://docassemble.org/docs/initial.html#images"
+---
+images:
+  star: star.svg
+  diamond: bluediamond.svg
+---
+decoration: diamond
+question: |
+  Welcome to Example, Inc.
+subquestion: |
+  We are the rock :star:s of the on-line
+  interviewing industry.
+mandatory: True
+  

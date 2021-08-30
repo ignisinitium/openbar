@@ -1,0 +1,31 @@
+metadata:
+  title: Action
+  example start: 2
+  example end: 3
+  documentation: "https://docassemble.org/docs/functions.html#process_action"
+---
+mandatory: True
+code: |
+  color = 'blue'
+---
+question: |
+  Review your information.
+subquestion: |
+  Your favorite color is
+  ${ color }.
+  [Change this]( ${ url_action('color') } )
+field: info_is_verified
+---
+question: |
+  What is your favorite color?
+fields:
+  - Favorite Color: color
+---
+question: |
+  Information submitted.
+subquestion: |
+  % if info_is_verified:
+  You have submitted the fact that
+  your favorite color is ${ color }.
+  % endif
+mandatory: True

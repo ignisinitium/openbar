@@ -1,0 +1,11 @@
+metadata:
+  title: Exit or restart with url
+  documentation: "https://docassemble.org/docs/questions.html#special buttons"
+---
+question: |
+  Congratulations, you found Nemo!
+buttons:
+  - Try again: restart
+  - Learn More: logout
+    url: https://en.wikipedia.org/wiki/Amphiprioninae
+mandatory: True

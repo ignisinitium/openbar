@@ -1,0 +1,23 @@
+metadata:
+  title: Message log
+  short title: Log
+  documentation: "https://docassemble.org/docs/functions.html#log"
+  example start: 2
+  example end: 3
+---
+image sets:
+  freepik:
+    attribution: |
+      Icon made by [Freepik](http://www.flaticon.com/authors/freepik)
+    images:
+      coins: coins36.svg
+---
+mandatory: True
+code: |
+  log("Hello, user!", "info")
+  log("Lookout, user!", "danger")
+---
+mandatory: True
+decoration: coins
+question: |
+  The interview is complete.

@@ -1,0 +1,9 @@
+metadata:
+  title: User language from browser
+  short title: Browser language
+  documentation: "https://docassemble.org/docs/functions.html#language_from_browser"
+---
+question: |
+  I think your language code is
+  `${ language_from_browser() }`.
+mandatory: True

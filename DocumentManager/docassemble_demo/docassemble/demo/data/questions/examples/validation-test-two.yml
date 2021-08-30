@@ -1,0 +1,23 @@
+metadata:
+  title: Input validation
+  short title: Valid
+  documentation: "https://docassemble.org/docs/fields#input validation"
+  example start: 1
+  example end: 3
+---
+modules:
+  docassemble.demo.validationfuncstwo
+---
+mandatory: True
+question: |
+  There were ${ number_of_tires }
+  tires in the garage.
+---
+question: |
+  How many car tires are in the
+  garage?
+fields:
+  - Tires: number_of_tires
+    datatype: integer
+    validate: is_multiple_of_four
+  

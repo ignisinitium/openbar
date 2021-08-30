@@ -1,0 +1,20 @@
+metadata:
+  title: Quote paragraphs
+  short title: Quote paragraphs
+  documentation: "https://docassemble.org/docs/functions.html#quote_paragraphs"
+---
+mandatory: True
+question: |
+  Your allegations
+subquestion: |
+  You allege that:
+
+  ${ quote_paragraphs(allegations) }
+---
+question: |
+  What do you allege?
+subquestion: |
+  Be verbose.
+fields:
+  - Allegations: allegations
+    input type: area

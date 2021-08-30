@@ -1,0 +1,16 @@
+metadata:
+  title: Gather
+  short title: Gather
+  documentation: "https://docassemble.org/docs/groups.html#gathering"
+  example start: 1
+  example end: 2
+---
+objects:
+  - fruit: DAList
+---
+mandatory: True
+question: |
+  There are ${ fruit.number_as_word() }
+  fruits in all.
+subquestion: |
+  The fruits are ${ fruit }.

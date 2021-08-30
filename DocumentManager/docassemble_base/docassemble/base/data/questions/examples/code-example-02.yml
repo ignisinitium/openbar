@@ -1,0 +1,12 @@
+metadata:
+  title: Two plus three
+  documentation: "https://docassemble.org/docs/code.html#python"
+---
+code: |
+  a = 2
+  b = 3
+  answer = a + b
+---
+question: |
+  The answer is ${ answer }.
+mandatory: True

@@ -1,0 +1,10 @@
+metadata:
+  title: "From .md file"
+  documentation: "https://docassemble.org/docs/documents.html#content file"
+---
+question: Your document is ready.
+attachment:
+  - name: A *hello world* document
+    filename: Hello_World_Document
+    content file: hello.md
+mandatory: True

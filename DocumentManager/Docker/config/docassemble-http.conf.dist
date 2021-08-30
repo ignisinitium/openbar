@@ -1,0 +1,31 @@
+ServerName ${DAHOSTNAME}
+<VirtualHost *:${DALISTENPORT}>
+    ServerAdmin ${DASERVERADMIN}
+    ServerName ${DAHOSTNAME}
+    DocumentRoot /var/www/html
+    RewriteEngine On
+    <IfModule mod_ssl.c>
+        RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 [R=301,L]
+    </IfModule>
+    RewriteCond %{REQUEST_URI}           ^${DAPOSTURLROOT}ws/socket.io                 [NC]
+    RewriteCond %{QUERY_STRING}          transport=websocket                           [NC]
+    RewriteRule ${DAPOSTURLROOT}ws/(.*)  ws://${DAWEBSOCKETSIP}:${DAWEBSOCKETSPORT}/$1 [P,L]
+    ProxyPass        ${DAPOSTURLROOT}ws/ http://${DAWEBSOCKETSIP}:${DAWEBSOCKETSPORT}/
+    ProxyPassReverse ${DAPOSTURLROOT}ws/ http://${DAWEBSOCKETSIP}:${DAWEBSOCKETSPORT}/
+    <IfModule !mod_ssl.c>
+        XSendFile on
+        XSendFilePath /usr
+        XSendFilePath /tmp
+        KeepAliveTimeout 10
+        WSGIDaemonProcess docassemble.webserver user=www-data group=www-data threads=5
+        WSGIScriptAlias ${DAWSGIROOT} /usr/share/docassemble/webapp/docassemble.wsgi
+        <Directory /usr/share/docassemble/webapp>
+            WSGIProcessGroup docassemble.webserver
+            WSGIApplicationGroup %{GLOBAL}
+            AllowOverride none
+            Require all granted
+        </Directory>
+    </IfModule>
+    ErrorLog /var/log/apache2/error.log
+    CustomLog /var/log/apache2/access.log combined
+</VirtualHost>

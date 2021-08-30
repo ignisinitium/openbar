@@ -1,0 +1,66 @@
+metadata:
+  title: Disable others radio
+  short title: Disable
+  documentation: "https://docassemble.org/docs/fields.html#object_radio"
+  example start: 3
+  example end: 3
+---
+mandatory: True
+objects:
+  agent: Individual
+  trustee: Individual
+  beneficiary: Individual
+---
+question: |
+  Who is the agent?
+fields:
+  - First name: agent.name.first
+  - Middle name: agent.name.middle
+    required: False
+  - Last name: agent.name.last
+  - Suffix: agent.name.suffix
+    required: False
+    code: name_suffix()
+---
+question: |
+  Who is the trustee?
+fields:
+  - no label: trustee
+    datatype: object_radio
+    disable others: True
+    none of the above: Someone else
+    choices:
+      - agent
+  - First name: trustee.name.first
+  - Middle name: trustee.name.middle
+    required: False
+  - Last name: trustee.name.last
+  - Suffix: trustee.name.suffix
+    required: False
+    code: name_suffix()
+---
+question: |
+  Who is the beneficiary?
+fields:
+  - no label: beneficiary
+    datatype: object_radio
+    disable others: True
+    none of the above: Someone else
+    choices:
+      - agent
+      - trustee
+  - First name: beneficiary.name.first
+  - Middle name: beneficiary.name.middle
+    required: False
+  - Last name: beneficiary.name.last
+  - Suffix: beneficiary.name.suffix
+    required: False
+    code: name_suffix()
+---
+mandatory: True
+question: |
+  The agent is ${ agent }.
+
+  The trustee is ${ trustee }.
+
+  The beneficiary is ${ beneficiary }.

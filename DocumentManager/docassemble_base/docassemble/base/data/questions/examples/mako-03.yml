@@ -1,0 +1,22 @@
+metadata:
+  title: If/else statement
+  short title: If/else statement
+  documentation: "https://docassemble.org/docs/markup.html#mako"
+---
+mandatory: True
+question: |
+  Commentary on the day of the month
+subquestion: |
+  Let me tell you about today.
+
+  % if day_of_month < 3:
+  The month just started!
+  % elif day_of_month < 15:
+  It is the beginning part of
+  the month.
+  % else:
+  It is the latter part of the month.
+  % endif
+---
+code: |
+  day_of_month = today().day

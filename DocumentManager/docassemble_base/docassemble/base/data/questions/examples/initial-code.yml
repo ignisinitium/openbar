@@ -1,0 +1,46 @@
+metadata:
+  title: Initial code
+  documentation: "https://docassemble.org/docs/logic.html#initial"
+  example start: 2
+  example end: 3
+---
+mandatory: True
+code: |
+  counter = 0
+---
+initial: use_counter
+code: |
+  counter = counter + 1
+---
+question: |
+  Do you want to turn on the
+  counter?
+yesno: use_counter
+---
+code: |
+  fruits = peaches + pears
+---
+question: |
+  How many peaches do you have?
+subquestion: |
+  The value of the counter
+  is ${ counter }.
+fields:
+  - no label: peaches
+    datatype: integer
+---
+question: |
+  How many pears do you have?
+subquestion: |
+  The value of the counter
+  is ${ counter }.
+fields:
+  - no label: pears
+    datatype: integer
+---
+question: |
+  You have ${ fruits } pieces of fruit.
+subquestion: |
+  The value of the counter
+  is ${ counter }.
+mandatory: True

@@ -1,0 +1,67 @@
+{%- set footer_content = get_part('global footer') %}
+{% extends 'flask_user/public_base.html' %}
+
+{% block content %}
+{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+
+<div class="row">
+<div class="col-sm-6">
+
+<h1>{{ word("Sign in") }}</h1>
+
+{# ** Login form ** #}
+<form action="{{ url_for('user.login') }}" method="POST" class="form" role="form">
+    {{ login_form.hidden_tag() }}
+
+    {# Username or Email #}
+    {% set field = login_form.username if user_manager.enable_username else login_form.email %}
+    {{ render_field(field) }}
+
+    {# Password #}
+    {{ render_field(login_form.password) }}
+
+    {# Remember me #}
+    {% if user_manager.enable_remember_me %}
+    {{ render_checkbox_field(login_form.remember_me) }}
+    {% endif %}
+
+    {# Submit button #}
+    {{ render_submit_field(login_form.submit) }}
+</form>
+    {% if user_manager.enable_forgot_password %}
+        <p>
+            <br/>
+            <a href="{{ url_for('user.forgot_password') }}">
+            {{ word("Forgot your Password?") }}</a>
+        </p>
+    {% endif %}
+
+</div>
+<div class="col-sm-6">
+
+<h1>{{ word("Register") }}</h1>
+
+{# ** Register form ** #}
+<form action="{{ url_for('user.register') }}" method="POST" novalidate formnovalidate class="form" role="form">
+    {{ register_form.hidden_tag() }}
+
+    {# Username or Email #}
+    {% set field = register_form.username if user_manager.enable_username else register_form.email %}
+    {{ render_field(field) }}
+
+    {% if user_manager.enable_email and user_manager.enable_username %}
+        {{ render_field(register_form.email) }}
+    {% endif %}
+
+    {{ render_field(register_form.password) }}
+
+    {% if user_manager.enable_retype_password %}
+        {{ render_field(register_form.retype_password) }}
+    {% endif %}
+
+    {{ render_submit_field(register_form.submit) }}
+</form>
+
+</div>
+</div>
+{% endblock %}

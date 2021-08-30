@@ -1,0 +1,31 @@
+#obsolete
+metadata:
+  title: Linguistics
+  example start: 3
+  example end: 3
+---
+include:
+  - basic-questions.yml
+---
+mandatory: True
+question: |
+  ${ case.defendant.as_noun(capitalize=True) }
+  ${ case.defendant.does_verb("have") }
+  ${ indefinite_article(balance_sheet_item) }.
+---
+question: |
+  What is the ${ case.defendant.possessive("balance") }?
+fields:
+  - Amount: balance
+    datatype: number
+---
+code: |
+  if balance < 0:
+    balance_sheet_item = "liability"
+  else:
+    balance_sheet_item = "asset"
+---
+code: |
+  if not client.is_plaintiff and client.is_defendant:
+    case.defendant.append(client)
+  case.defendant.there_are_any = True

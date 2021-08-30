@@ -1,0 +1,50 @@
+metadata:
+  title: Cron test 1
+---
+mandatory: True
+code: |
+  multi_user = True
+  allow_cron = True
+  status = 'normal'
+  counter = 0
+---
+initial: True
+code: |
+  counter += 1
+  process_action()
+---
+event: cron_daily
+code: |
+  import sys
+  sys.stderr.write("Should delete this.\n")
+  command('exit')
+---
+event: cron_hourly_background
+code: |
+  #response("Cron hourly was called.  Counter is ${ counter }.")
+  background_response_action('save_counter', counter=counter)
+---
+event: save_counter
+code: |
+  counter = action_argument('counter')
+  background_response()
+---
+event: set_status
+code: |
+  if 'status' in action_arguments():
+    status = action_argument('status')
+  response(status)
+---
+mandatory: True
+question: |
+  The current status is ${ status } and the counter is ${ counter }.
+subquestion: |
+  Set the status to:
+
+  * [normal](${ interview_url_action('set_status', status='normal') })
+  * [danger](${ interview_url_action('set_status', status='danger') })
+  * [critical](${ interview_url_action('set_status', status='critical') })
+
+  To read the status without changing it, use:
+
+  * [this](${ interview_url_action('set_status') })

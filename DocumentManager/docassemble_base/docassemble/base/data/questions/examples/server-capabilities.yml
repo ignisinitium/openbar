@@ -1,0 +1,11 @@
+metadata:
+  title: Server capabilities
+  documentation: "https://docassemble.org/docs/functions.html#server_capabilities"
+---
+mandatory: True
+question: |
+  Server capabilities
+subquestion: |
+  % for feature, enabled in server_capabilities().items():
+  * **${ feature }**: ${ 'enabled' if enabled else 'disabled' }
+  % endfor

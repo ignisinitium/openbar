@@ -1,0 +1,37 @@
+metadata:
+  title: Indent paragraphs
+  short title: Indent
+  documentation: "https://docassemble.org/docs/functions.html#indent"
+  example start: 1
+  example end: 2
+---
+mandatory: True
+question: |
+  Your allegations
+subquestion: |
+  You allege that:
+
+  1.  The sky is blue.
+
+  2.  You have a house.
+
+      Your house has a roof.
+
+      Your roof is made up of many
+      shingles.
+
+  3.  You have a car.
+
+  ${ indent(car_allegations) }
+
+  4.  You have at least a high
+      school education.
+---
+template: car_allegations
+content: |
+  Your car is black.
+
+  Your car's gas tank is nearly empty.
+
+  Your car goes from 0 to 60 fast enough
+  not to be rear-ended on the highway.

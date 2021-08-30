@@ -1,0 +1,29 @@
+---
+modules:
+  - docassemble.base.util
+---
+mandatory: True
+code: |
+  need(test_screen)
+  need(final_screen)
+---
+sets: test_screen
+question: Test screen
+subquestion: |
+  Your favorite fish is ${ user_favorite_fish }.
+---
+sets: final_screen
+question: Hello
+subquestion: |
+  You can set lots of information by [clicking this link](${
+  url_action('set_stuff', fish='trout', berry='strawberry',
+  money=65433, actor='Will Smith')}).
+---
+event: set_stuff
+code: |
+  user_favorite_fish = action_argument('fish')
+  user_favorite_fruit = action_argument('berry')
+  if action_argument('money') > 15000:
+    user_is_rich = True
+  actor_to_hire = action_argument('actor')
+---

@@ -1,0 +1,16 @@
+metadata:
+  title: Special screen
+  example start: 1
+  example end: 1
+  documentation: "https://docassemble.org/docs/questions.html#event"
+---
+question: |
+  This is a special screen.
+event: show_special_screen
+---
+mandatory: True
+code: |
+  show_special_screen
+  
+  
+  

@@ -1,0 +1,17 @@
+metadata:
+  title: Dead end question
+  documentation: "https://docassemble.org/docs/questions.html#ending screens"
+  example start: 1
+  example end: 2
+---
+mandatory: True
+code: |
+  # insert interview logic here
+  all_done
+---
+question: |
+  You have reached the end of the
+  interview.
+subquestion: |
+  I hope you had a good time!
+sets: all_done

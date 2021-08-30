@@ -1,0 +1,7 @@
+metadata:
+  title: Command
+  documentation: "https://docassemble.org/docs/functions.html#command"
+---
+mandatory: True
+code: |
+  command('exit', url="https://google.com")

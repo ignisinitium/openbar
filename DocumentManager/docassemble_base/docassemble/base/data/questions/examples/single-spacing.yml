@@ -1,0 +1,54 @@
+metadata:
+  title: Spacing
+  documentation: "https://docassemble.org/docs/documents.html#metadata rtf pdf"
+---
+question: |
+  Here is your document.
+subquestion: |
+  It demonstrates types of spacing.
+attachments:
+  - name: A test document
+    filename: test_document
+    metadata:
+      SingleSpacing: True
+    content: |
+      ${ client } is entitled to
+      benefits plan ${ benefits }.
+
+      Four score and seven years ago
+      our fathers brought forth on
+      this continent, a new nation,
+      conceived in Liberty, and
+      dedicated to the proposition
+      that all men are created equal.
+
+      Now we are engaged in a great
+      civil war, testing whether that
+      nation, or any nation so
+      conceived and so dedicated,
+      can long endure.
+
+      # What about double-spacing?
+
+      Let's try this with double
+      spacing.
+
+      [DOUBLESPACING]
+
+      Four score and seven years ago
+      our fathers brought forth on
+      this continent, a new nation,
+      conceived in Liberty, and
+      dedicated to the proposition
+      that all men are created equal.
+
+      Now we are engaged in a great
+      civil war, testing whether that
+      nation, or any nation so
+      conceived and so dedicated,
+      can long endure.
+mandatory: True
+---
+code: |
+  client = "Jane Doe"
+  benefits = "G-432"

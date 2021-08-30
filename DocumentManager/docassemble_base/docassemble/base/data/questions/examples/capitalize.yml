@@ -1,0 +1,14 @@
+metadata:
+  title: Capitalize
+  documentation: "https://docassemble.org/docs/functions.html#capitalize"
+---
+question: |
+  ${ capitalize(color) } is your
+  favorite color, but ${ color } is
+  not your favorite color of eggs.
+sets: all_done
+---
+mandatory: True
+code: |
+  color = 'green'
+  all_done

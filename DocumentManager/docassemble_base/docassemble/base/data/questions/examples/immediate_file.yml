@@ -1,0 +1,16 @@
+metadata:
+  title: Immediate file
+  documentation: "https://docassemble.org/docs/functions.html#response"
+---
+attachment:
+  name: A file
+  file: test_file
+  variable name: the_file
+  valid formats:
+    - pdf
+  content: |
+    Hello, ${ url_args.get('name', 'you') }!
+---
+mandatory: True
+code: |
+  response(file=the_file.pdf)

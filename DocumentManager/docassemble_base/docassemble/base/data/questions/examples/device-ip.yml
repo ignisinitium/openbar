@@ -1,0 +1,9 @@
+metadata:
+  title: User IP
+  documentation: "https://docassemble.org/docs/functions.html#device"
+---
+question: |
+  Your IP address is
+  ${ device(ip=True) }.
+mandatory: True
+

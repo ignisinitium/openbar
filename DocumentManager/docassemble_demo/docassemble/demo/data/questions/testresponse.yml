@@ -1,0 +1,14 @@
+#event: say_hello
+mandatory: True
+response: |
+  Hello, ${ world }!
+---
+question: |
+  What is the world?
+fields:
+  World: world
+---
+question: |
+  Click the link.
+subquestion: |
+  [Click here](${ url_action('say_hello') })

@@ -1,0 +1,90 @@
+metadata:
+  title: Review answers
+  example start: 3
+  example end: 3
+  documentation: "https://docassemble.org/docs/fields.html#review"
+---
+include:
+  - basic-questions.yml
+---
+initial: True
+code: |
+  process_action()
+---
+event: review_answers
+question: |
+  Review your answers
+review:
+  - note: |
+      Welcome to the review of answers.
+  - note: |
+      #### Your identity
+    show if: user.name.first
+  - Change your name: user.name.first
+    help: |
+      You said your name was
+      **${ user.name }**.
+  - note: |
+      #### Your favorite foods
+    show if: fruit
+  - Revisit Fruit: fruit
+    button: |
+      You said you liked ${ fruit }.
+  - Revisit Vegetable: vegetable
+    button: |
+      You said you liked ${ vegetable }.
+  - Revisit Fungus: fungi
+    button: |
+      You said you liked ${ fungi }.
+  - note: |
+      We suspect you prefer
+      ${ fruit } to ${ vegetable }.
+---
+question: |
+  What is your favorite fruit?
+fields:
+  - no label: fruit
+---
+question: |
+  What is your favorite vegetable?
+fields:
+  - no label: vegetable
+---
+question: |
+  What is your favorite fungi?
+fields:
+  - no label: fungi
+---
+mandatory: True
+code: |
+  menu_items = [ action_menu_item('Review Answers', 'review_answers') ]
+  do_initial_review = True
+---
+mandatory: True
+code: |
+  if do_initial_review:
+    fruit = "apples"
+    vegetable = "turnips"
+    user.name.first = "John"
+    user.name.last = "Doe"
+    do_initial_review = False
+    force_ask(review_answers)
+comment: |
+  This is just a trick to get the
+  review page to show as the first
+  screen of the interview, with some
+  of the answers already filled out.
+
+  Normally, the user would find the
+  review page from the web app menu
+  after answering some of the
+  questions.
+---
+question: |
+  Ok, ${ user }, you like ${ fruit },
+  ${ vegetable }, and ${ fungi }.
+subquestion: |
+  You can revisit your answers by
+  selecting "Review Answers" from the
+  menu.
+mandatory: True

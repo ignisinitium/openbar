@@ -1,0 +1,7 @@
+metadata:
+  title: Two plus two in template
+  documentation: "https://docassemble.org/docs/code.html#python"
+---
+question: |
+  The answer is ${ 2 + 2 }.
+mandatory: True

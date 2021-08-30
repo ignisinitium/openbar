@@ -1,0 +1,22 @@
+metadata:
+  title: Age
+  documentation: "https://docassemble.org/docs/objects.html"
+  example start: 1
+  example end: 4
+---
+objects:
+  - user: Individual
+---
+question: |
+  How old are you?
+fields:
+  - Age in years: user.age
+    datatype: number
+---
+mandatory: True
+code: |
+  need(user.age)
+---
+mandatory: True
+question: |
+  You are ${ user.age_in_years() } years old.

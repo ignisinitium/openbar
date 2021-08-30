@@ -1,0 +1,56 @@
+metadata:
+  title: OCR text in the background 
+  short title: background OCR
+  documentation: "https://docassemble.org/docs/functions.html#ocr_file"
+  example start: 1
+  example end: 8
+---
+mandatory: True
+code: |
+  the_file
+  the_task
+  user_testimonial
+  if not the_task.ready():
+    waiting_screen
+---
+question: |
+  Please upload a file
+fields:
+  - File: the_file
+    datatype: files
+---
+code: |
+  the_task = background_action('ocr_start', None)
+---
+event: ocr_start
+code: |
+  the_text = ocr_file(the_file)
+  background_response_action('ocr_finish', text=the_text)
+---
+event: ocr_finish
+code: |
+  text_of_the_file = action_argument('text')
+  background_response()
+---
+question: |
+  How do you describe what happened?
+fields:
+  - no label: user_testimonial
+    input type: area
+---
+event: waiting_screen
+reload: 5
+question: |
+  Please wait.
+---
+mandatory: True
+question: |
+  All done
+subquestion: |
+  You claim that:
+
+  ${ quote_paragraphs(user_testimonial) }
+
+  The document states:
+
+  ${ quote_paragraphs(text_of_the_file) }

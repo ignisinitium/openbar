@@ -1,0 +1,573 @@
+metadata:
+  title: Document assembly wizard
+  short title: Wizard
+---
+modules:
+  - docassemble.webapp.playground
+  - docassemble.base.util
+  - docassemble.base.logger
+---
+objects:
+  - interview: DAInterview
+  - main_code: DAQuestion
+  - metadata: DAQuestion
+  - modules: DAQuestion
+  - decorations: DAQuestion
+  - attachments: DAAttachmentList
+---
+initial: True
+code: |
+  if not user_logged_in():
+      message("You are not authorized to view this page")
+---
+question: |
+  Have you already uploaded the template (or templates) you want to use?
+subquestion: |
+  Document templates are stored in the [Templates section] within the
+  [Playground].
+
+  If you have not already uploaded your templates, you can upload them
+  with this wizard.
+
+  If you have already uploaded a template but you want to upload a new
+  version of it, answer "No" here.
+
+  [Playground]: ${ url_of('playground', project=current_project) }
+  [Templates section]: ${ url_of('playgroundtemplate', project=current_project) }
+yesno: templates_already_uploaded
+---
+question: |
+  Please upload one or more templates that you want your interview to
+  assemble.
+subquestion: |
+  The following types of files are accepted: 
+
+  * Microsoft Word .docx files with variable names in double curly
+    brackets ([Jinja2] template format).
+  * Adobe PDF files with fillable fields.
+  * Text files in [Markdown] format with variable names embedded
+    in [Mako syntax].
+  * Microsoft Word files with variable names in single square
+    brackets.  These files will be converted to [Markdown] format.
+    Only basic formatting will be retained, such as bold, italics, and
+    section headings.
+
+  [Mako syntax]: https://docassemble.org/docs/markup.html#mako
+  [Jinja2]: http://jinja.pocoo.org/docs
+  [Markdown]: https://daringfireball.net/projects/markdown/syntax
+fields:
+  - Files: template_uploads
+    datatype: files
+---
+question: |
+  Which template or templates do you want the interview to assemble?
+fields:
+  - no label: template_choices
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      PlaygroundSection('template', project=current_project).reduced_file_list()
+---
+code: |
+  attachments.clear()
+  templates = PlaygroundSection('template', project=current_project)
+  if templates_already_uploaded:
+    chosen_templates = [file for file in template_choices if template_choices[file] is True]
+  else:
+    chosen_templates = list()
+    for the_file in template_uploads:
+      new_template = templates.copy_from(the_file.path(), the_file.filename)
+      chosen_templates.append(new_template)
+  for template_filename in chosen_templates:
+    if templates.is_pdf(template_filename):
+      attachment = attachments.appendObject()
+      attachment.type = 'pdf'
+      attachment.pdf_filename = template_filename
+      attachment.fields = templates.get_fields(template_filename)
+    elif templates.is_fillable_docx(template_filename):
+      attachment = attachments.appendObject()
+      attachment.type = 'docx'
+      attachment.docx_filename = template_filename
+    else:
+      if templates.is_markdown(template_filename):
+        markdown_filename = template_filename
+      else:
+        markdown_filename = templates.convert_file_to_md(template_filename)
+      if markdown_filename is None:
+        raise Exception("The file provided was not a type that could be processed.")
+      attachment = attachments.appendObject()
+      attachment.type = 'md'
+      base_file = varname(base_name(markdown_filename))
+      attachment.content = '${ ' + base_file + ' }'
+      attachment.markdown_filename = markdown_filename
+      new_template = interview.questions.initializeObject(base_file)
+      new_template.type = 'template'
+      new_template.interview = interview
+      new_template.field_list.appendObject()
+      new_template.field_list[0].variable = base_file
+      new_template.field_list[0].field_type = 'template'
+      new_template.field_list[0].question = new_template
+      new_template.template_file = markdown_filename
+  attachments.gathered = True
+---
+question: |
+  Do you want to decorate any of your questions with images?
+yesno: using_decorations
+---
+question: |
+  Have you already uploaded the decoration files you want to use?
+subquestion: |
+  Images are stored in the [Static files section] within the
+  [Playground].
+
+  If you have not already uploaded your decoration files, you can
+  upload them with this wizard.
+
+  [Playground]: ${ url_of('playground', project=current_project) }
+  [Static files section]: ${ url_of('playgroundstatic', project=current_project) }
+yesno: decorations_already_uploaded
+---
+question: |
+  Please upload one or more files containing decorations.
+fields:
+  - Files: decoration_uploads
+    datatype: files
+---
+question: |
+  Which static files are decorations that you want to use?
+fields:
+  - no label: decoration_choices
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      PlaygroundSection('static', project=current_project).image_file_list()
+---
+code: |
+  if using_decorations:
+    static = PlaygroundSection('static', project=current_project)
+    if len(static.image_file_list()) and decorations_already_uploaded:
+      chosen_decorations = [file for file in decoration_choices if decoration_choices[file] is True]
+    else:
+      chosen_decorations = list()
+      for the_file in decoration_uploads:
+        new_static = static.copy_from(the_file.path(), the_file.filename)
+        chosen_decorations.append(new_static)
+    for decoration_filename in chosen_decorations:
+      decoration_key = oneline(base_name(decoration_filename))
+      new_decoration = interview.decorations.initializeObject(decoration_key)
+      new_decoration.filename = decoration_filename
+      if current_project == 'default':
+        new_decoration.fileref = 'docassemble.playground' + str(static.user_id) + ':' + decoration_filename
+      else:
+        new_decoration.fileref = 'docassemble.playground' + str(static.user_id) + current_project + ':' + decoration_filename
+  interview.decorations.gathered = True
+---
+mandatory: True
+code: |
+  splash_screen
+  metadata.type = 'metadata'
+  metadata.interview = interview
+  metadata.file_name = interview.file_name
+  metadata.title = interview.title
+  metadata.short_title = interview.short_title
+  interview.blocks.append(metadata)
+---
+mandatory: True
+code: |
+  interview.demonstrate()
+  if interview.has_decorations():
+    decorations.type = 'images'
+    decorations.interview = interview
+    interview.blocks.append(decorations)
+---
+mandatory: True
+code: |
+  interview.demonstrate()
+  need(attachments.gathered)
+  try:
+    varsinuse = Playground().variables_from(interview.source())
+  except:
+    problem_with_attachment
+  end_question = interview.questions.initializeObject('all_done')
+  end_question.type = 'question'
+  end_question.is_mandatory = True
+  end_question.interview = interview
+  end_question.attachments = attachments
+  end_question.field_list.appendObject()
+  end_question.field_list[0].field_type = 'end_attachment'
+  end_question.field_list[0].variable = 'all_done'
+  end_question.field_list[0].question = end_question
+---
+mandatory: True
+code: |
+  interview.demonstrate()
+  ok = False
+  while not ok:
+    ok = True
+    varsinuse = Playground().variables_from(interview.source())
+    for var in sorted(varsinuse['undefined_names']):
+      if var not in interview.questions:
+        new_question = interview.questions.initializeObject(var)
+        new_question.interview = interview
+        new_question.field_list.appendObject()
+        new_question.field_list[0].variable = var
+        new_question.field_list[0].question = new_question
+        ok = False
+  pg = Playground()
+  yaml_file = interview.yaml_file_name()
+  pg.write_file(yaml_file, interview.source())
+  interview_url = pg.interview_url(yaml_file)
+  package_name = to_package_name(interview.file_name)
+  pg.write_package(package_name, interview.package_info())
+  zip_url = url_of('create_playground_package', package=package_name, project=current_project)
+  all_done
+---
+sets: all_done
+question: Here is the interview you created
+subquestion: |
+  You can try to
+  <a target="_blank" href="${ interview_url }">run the interview</a>
+  to see how it works.
+
+  You can also [download it as a package].
+
+  To make changes to your interview, go to the [Playground] and edit
+  [`${ yaml_file }`](${ url_of('playground', file=yaml_file, project=current_project) }).
+  % if len(attachments):
+  To edit the ${ attachments.as_noun('template') }, go to the
+  [Templates section] and edit ${ attachments.url_list(current_project) }.
+  % endif
+
+  ${ indent_by(interview.source(), 4) }
+
+  [download it as a package]: ${ zip_url }
+  [Playground]: ${ url_of('playground', project=current_project) }
+  [Templates section]: ${ url_of('playgroundtemplate', project=current_project) }
+buttons:
+  - Exit: exit
+    url: ${ url_of('playground', project=current_project, file=yaml_file) }
+---
+generic object: DAQuestion
+question: |
+  Signature collection page
+subquestion: |
+  The variable `${ x.field_list[0].variable }` will contain the image
+  of the user's signature.  The screen that asks for the signature is
+  configurable.
+
+  Click Help to see a model of the various parts of the signature
+  gathering screen.
+help: |
+  These are these parts of the signature collection screen:
+  
+  [FILE docassemble.base:sample-signature.png]
+
+  If your users are using smartphones, it is a good idea to leave
+  the text above the signature blank, and keep all text very short so
+  that it does not go onto more than one line.
+  
+  % if len(varsinuse['all_names_reduced']):
+  You can include the value of a variable by enclosing it in
+  `${ "${ ... }" }`.
+
+  The variables you can use are:
+
+  % for var in x.names_reduced():
+  * `${ var }`
+  % endfor
+  % endif
+fields:
+  - Message: x.question_text
+  - Text above signature: x.subquestion_text
+    required: False
+  - Text under signature: x.under_text
+    required: False
+---
+generic object: DAQuestion
+question: |
+  % if x.field_list[0].field_type == 'end_attachment':
+  What should the message be on the final screen of
+  the interview?
+  % else:
+  How would you like to ask the question that defines
+  the ${ x.field_list.as_noun('variable') }
+  ${ x.field_list }?
+  % endif
+subquestion: |
+  % if x.field_list[0].field_type == 'end_attachment':
+  On the final screen, the user will have the opportunity to
+  download the assembled document, e-mail it, or click the
+  Exit button to leave.
+  % endif
+
+  Click Help to see a model of the **Title** and **Body** parts of
+  a screen.
+help: |
+  The **Title** and **Body** are these parts of the screen:
+  
+  [FILE docassemble.base:sample-titles.png]
+
+  % if len(varsinuse['all_names_reduced']):
+  You can include the value of a variable by enclosing it in
+  `${ "${ ... }" }`.
+
+  The variables you can use are:
+
+  % for var in varsinuse['all_names_reduced']:
+  * `${ var }`
+  % endfor
+  % endif
+fields:
+  - Title: x.question_text
+    default:
+      code: |
+        'Your document is ready.' if x.field_list[0].field_type == 'end_attachment' else ''
+  - Body: x.subquestion_text
+    input type: area
+    required: False
+    default:
+      code: |
+        'Thank you for using this interview.' if x.field_list[0].field_type == 'end_attachment' else ''
+  - Decoration: x.decoration
+    datatype: radio
+    default: "None"
+    code: |
+      x.interview.decoration_list()
+    show if:
+      code: |
+        x.interview.has_decorations()
+---
+generic object: DAQuestion
+question: |
+  If you would like the question that sets
+  `${ x.field_list[0].variable }` to set any other variables,
+  select the additional variables.
+fields:
+  - no label: x.additional_fields
+    datatype: checkboxes
+    none of the above: False
+    code: |
+      x.other_variables()
+---
+generic object: DAQuestion
+question: |
+  Will the variable `${ x.field_list[0].variable }` be set by asking the
+  user a question, or by evaluating a logic statement, or something else?
+field: x.type
+choices:
+  - A question: question
+  - A logic statement: code
+  - Gathering a signature: signature
+  - Inserting a template: text_template
+---
+generic object: DAQuestion
+question: |
+  Please provide the logic statements that define
+  `${ x.field_list[0].variable }`.
+subquestion: |
+  You can use any valid Python source code to define the variable.
+fields:
+  - no label: x.code
+    input type: area
+    default: "${ x.field_list[0].variable } = "
+---
+generic object: DAQuestion
+question: |
+  Please provide the subject and body of the template that defines
+  `${ x.field_list[0].variable }`.
+fields:
+  - Subject: x.template_subject
+    required: False
+  - Type: x.template_type
+    default: text
+    choices:
+      - From text: text
+      - From a file: file
+  - Body: x.template_body
+    input type: area
+    show if:
+      variable: x.template_type
+      is: text
+  - File: x.template_file
+    code: |
+      PlaygroundSection('template', project=current_project).reduced_file_list()
+    show if:
+      variable: x.template_type
+      is: file
+---
+generic object: DAField
+question: |
+  What type of answer is required to define
+  `${ x.variable }`?
+subquestion: |
+  For example, if the type of answer is "Yes or no," then
+  `${ x.variable }` will be defined either as `True` or
+  `False`.
+field: x.field_type
+choices:
+  - "Yes or no": yesno
+  - "Yes, no, or I don't know": yesnomayne
+  - "One line of input": text
+  - "Large text area": area
+  - "Image upload": file
+---
+generic object: DAField
+question: |
+  What type of value is `${ x.variable }`?
+field: x.field_data_type
+default: text
+choices:
+  - "Text": text
+  - "Integer": integer
+  - "Number": number
+  - "Slider": range
+  - "Currency": currency
+  - "Date": date
+  - "E-mail address": email
+---
+generic object: DAField
+question: |
+  You said `${ x.variable }` should be set with a slider.  What
+  parameters should be used for the numeric range?
+fields:
+  - Minimum: x.range_min
+    datatype: numeric
+  - Maximum: x.range_max
+    datatype: numeric
+  - Step: x.range_step
+    datatype: numeric
+    default: 1.0
+---
+generic object: DAField
+question: |
+  How should the field that defines the variable `${ x.variable }` be
+  labeled?
+fields:
+  - "Use a label?": x.has_label
+    datatype: yesnoradio
+    default: True
+  - Text of label: x.label
+    show if:
+      variable: x.has_label
+      is: True
+---
+generic object: DAAttachment
+question: |
+  % if x.type == 'md':
+  What is the name of the document that will be assembled using
+  the template `${ x.markdown_filename }`?
+  % elif x.type == 'docx':
+  What is the name of the document that will be assembled using
+  the template `${ x.docx_filename }`?
+  % else:
+  What is the name of the document that will be filled in using
+  the template `${ x.pdf_filename }`?
+  % endif
+subquestion: |
+  E.g., if the name is "Complaint for Custody," then on the final
+  screen, this will be the heading of the area where the user can
+  download and/or e-mail the document.  It will also be used to set
+  the name of the downloaded file.
+fields:
+  - Document Name: x.name
+    default: Petition for Allowance of Appeal
+---
+generic object: DAInterview
+question: |
+  How would you like to name your interview?
+subquestion: |
+  
+  The **File name** is the name of the interview within the
+  [Playground].  If you set this to `petition to open`, your interview
+  file name will be `petition_to_open.yml`.
+
+  The **Title** is the name that the user will see in the upper-left
+  corner of the screen during the interview.  The user will also see
+  this name in the [Interview List].
+
+  The **Short title** is the name that mobile users will see in the
+  upper-left corner of the screen.  It should be very short.
+
+  [Playground]: ${ url_of('playground', project=current_project) }
+  [Interview List]: ${ url_of('interviews', project=current_project) }
+fields:
+  - File name: x.file_name
+    default: appeal_petition
+  - Title: x.title
+    default: Petition for Allowance of Appeal
+  - Short title: x.short_title
+    default: Appeal
+---
+generic object: DAQuestion
+question: |
+  The following block was added to your interview.
+subquestion: |
+  ${ indent_by(x.source(), 4) }
+  [SKIPLINE]
+field: x.demonstrated
+---
+question: |
+  Wizard for a simple document assembly interview
+subquestion: |
+  This wizard will create a **docassemble** interview that assembles
+  one or more documents for the user.
+
+  It will ask you to upload at least one document template.
+
+  You can upload Microsoft Word .docx template files in which variable
+  names are embedded in double curly brackets ([Jinja2 syntax]).  For
+  example, if your .docx document contains the text:
+
+  > My phone number is {{ phone_number }} and I live in {{ city }}.
+
+  then the wizard will build a **docassemble** interview that gathers
+  definitions of the variables `phone_number` and `city` in order to
+  create the assembled document.
+
+  Here is a [sample Word file] you can use as a starting point.
+  
+  You can also upload PDF files containing fillable fields.  The
+  names of the fields will be converted to variable names.
+  
+  You can also upload templates in [Markdown] format that contain
+  variables embedded using [Mako syntax]:
+
+      Your phone number is ${ '${ phone_number }' } and you live in ${ '${ city }' }.
+
+  Regardless of what file format you use, the files you upload will be
+  saved in the [Templates section] of the [Playground].  If the
+  template file you want to use is already in the [Templates section],
+  you do not need to upload it again unless you want to upload a new
+  version.
+  
+  Once your interview has been created, it will be available in the
+  [Playground], where you can edit it.
+
+  This wizard is primarily a tool to help new interview authors learn
+  how to write **docassemble** interviews.  There are many features in
+  **docassemble** that are not available with this wizard.
+
+  [Jinja2 syntax]: http://jinja.pocoo.org/docs
+  [Mako syntax]: https://docassemble.org/docs/markup.html#mako
+  [Playground]: ${ url_of('playground', project=current_project) }
+  [sample Word file]: ${ url_of('docassemble.webapp:data/static/test-document.docx') }
+  [Markdown]: https://daringfireball.net/projects/markdown/syntax
+  [Documents]: https://docassemble.org/docs/documents.html
+  [Templates section]: ${ url_of('playgroundtemplate', project=current_project) }
+field: splash_screen
+---
+event: problem_with_attachment
+question: |
+  Sorry, the file you uploaded could not be
+  processed.
+subquestion: |
+  The Wizard can only read the variables referenced
+  in a Word document if the Word document contains no
+  Jinja2 errors.  It appears that your file contained
+  an error
+
+  Please fix the errors, click the Back button, and
+  try uploading it again.
+---
+code: |
+  current_project = url_args.get('project', 'default')

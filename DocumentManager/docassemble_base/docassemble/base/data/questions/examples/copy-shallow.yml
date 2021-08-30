@@ -1,0 +1,147 @@
+metadata:
+  title: Shallow copy
+  documentation: "https://docassemble.org/docs/objects.html#DAObject.copy_shallow"
+  example start: 1
+  example end: 2
+---
+objects:
+  - orig_company: DAObject
+---
+code: |
+  other_company = orig_company.copy_shallow('other_company')
+---
+generic object: DAObject
+objects:
+  - x.ceo: Individual
+  - x.cfo: Individual
+  - x.employee: DAList.using(object_type=Individual, there_are_any=True)
+---
+generic object: DAObject
+question: |
+  What is the company's name?
+fields:
+  - Name: x.company_name
+---
+generic object: DAObject
+question: |
+  Who is the CEO of ${ x.company_name }?
+fields:
+  - First Name: x.ceo.name.first
+  - Last Name: x.ceo.name.last
+---
+generic object: DAObject
+question: |
+  Who is the CFO of ${ x.company_name }?
+fields:
+  - First Name: x.cfo.name.first
+  - Last Name: x.cfo.name.last
+---
+generic object: DAObject
+question: |
+  What is the name of the
+  ${ ordinal(i) } employee of
+  ${ x.company_name }?
+fields:
+  - First Name: x.employee[i].name.first
+  - Last Name: x.employee[i].name.last
+---
+generic object: DAObject
+question: |
+  Are there any other employees of
+  ${ x.company_name }?
+subquestion: |
+  So far, you have told me about:
+
+  % for ee in x.employee:
+  * ${ ee }
+  % endfor
+yesno: x.employee.there_is_another
+---
+generic object: DAObject
+template: x.summary
+content: |
+  The company name is ${ x.company_name }.
+  
+  The CEO is ${ x.ceo }.
+
+  The CFO is ${ x.cfo }.
+
+  The employees are:
+
+  % for ee in x.employee:
+  ${ ee }
+  % endfor
+---
+generic object: DAObject
+table: x.employee.table
+rows: x.employee
+columns:
+  - Name: row_item.name.full()
+edit:
+  - name.first
+---
+generic object: DAObject
+field: x.employee.revisit
+question: |
+  Please review the employees of
+  ${ x.company_name }.
+subquestion: |
+  ${ x.employee.table }
+
+  ${ x.employee.add_action() }
+---
+mandatory: True
+code: |
+  orig_company.company_name
+  orig_company.ceo.name.first
+  orig_company.cfo.name.first
+  orig_company.employee.gather()
+  other_company.company_name
+  other_company.ceo.name.first
+  other_company.cfo.name.first
+  other_company.employee.gather()
+---
+event: review_info
+question: |
+  Edit company info
+review:
+  - note: |
+      ##### Original company
+  - Edit: orig_company.company_name
+    button: |
+      ${ orig_company.company_name }
+  - Edit: orig_company.ceo.name.first
+    button: |
+      ${ orig_company.ceo }
+  - Edit: orig_company.cfo.name.first
+    button: |
+      ${ orig_company.cfo }
+  - Edit: orig_company.employee.revisit
+    button: |
+      The employees are:
+        
+      % for ee in orig_company.employee:
+      * ${ ee }
+      % endfor
+  - note: |
+      ##### Other company
+  - Edit: other_company.company_name
+    button: |
+      ${ other_company.company_name }
+  - Edit: other_company.ceo.name.first
+    button: |
+      ${ other_company.ceo }
+  - Edit: other_company.cfo.name.first
+    button: |
+      ${ other_company.cfo }
+  - Edit: other_company.employee.revisit
+    button: |
+      The employees are:
+        
+      % for ee in other_company.employee:
+      * ${ ee }
+      % endfor
+---
+mandatory: True
+code: |
+  review_info

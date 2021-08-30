@@ -1,0 +1,32 @@
+metadata:
+  title: Show fields with code
+  short title: Code show if
+  documentation: "https://docassemble.org/docs/fields.html#show if"
+---
+question: |
+  Please fill in the following information.
+fields:
+  - Favorite fruit: fruit
+  - Favorite vegetable: vegetable
+  - Favorite fungus: mushroom
+    show if:
+      code: |
+        2 + 2 == 3
+---
+question: |
+  Please fill in the following information.
+fields:
+  - Favorite cuisine: cuisine
+    choices:
+      - Chinese food
+      - French food
+      - Belgian food
+  - Favorite TV show: tv_show
+    show if:
+      code: |
+        2 + 2 == 4
+---
+question: |
+  You like ${ fruit }, ${ vegetable },
+  ${ cuisine }, and ${ tv_show }.
+mandatory: True

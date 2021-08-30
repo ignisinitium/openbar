@@ -1,0 +1,24 @@
+metadata:
+  title: Language
+  documentation: "https://docassemble.org/docs/documents.html#language"
+  example start: 1
+  example end: 3
+---
+initial: True
+code: |
+  set_language('es')
+---
+code: |
+  food_list = DAList(elements=['fries', 'a Coke'])
+---
+mandatory: True
+language: es
+question: El documento está listo.
+attachment:
+  - name: Alimentos
+    language: en
+    filename: food_order
+    docx template file: document-language.docx
+    field variables:
+      - food_list
+

@@ -1,0 +1,15 @@
+{% extends 'flask_user/emails/base_message.txt' %}
+
+{% block message %}
+{{ word('Thank you for registering with') }} {{ app_name }}.
+
+{% if user_manager.enable_confirm_email -%}
+{{ word('You will need to confirm your email next.') }}
+
+{{ word('If you initiated this registration, please visit the link below:') }}
+    {{ confirm_email_link }}
+
+{{ word('If you did not initiate this registration, you may safely ignore this email.') }}
+
+{%- endif %}
+{% endblock %}

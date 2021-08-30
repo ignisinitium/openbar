@@ -1,0 +1,22 @@
+metadata:
+  title: Field element
+  documentation: "https://docassemble.org/docs/functions.html#js_getField"
+---
+question: |
+  What do you want for
+  dessert<span id="the_dessert"></span>?
+fields:
+  - Dessert: dessert
+  - html: |
+      <a href="#" id="show_me" class="btn btn-primary">Eat it</a>
+script: |
+  <script>
+    $("#show_me").click(function(){
+      $("#the_dessert").html(" besides " + getField('dessert').value);
+      return false;
+    });
+  </script>
+---
+question: |
+  Your last dessert was ${ dessert }.
+mandatory: True

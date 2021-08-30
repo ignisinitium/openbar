@@ -1,0 +1,14 @@
+metadata:
+  title: Labels ≠ values
+  documentation: "https://docassemble.org/docs/fields.html#field with buttons"
+---
+question: |
+  How would you like to pay for your
+  car?
+field: target_variable
+buttons:
+  - Buy it: purchaser
+  - Lease it: borrower
+---
+question: You are a ${ target_variable }.
+mandatory: True

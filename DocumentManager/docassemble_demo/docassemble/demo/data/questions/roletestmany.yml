@@ -1,0 +1,53 @@
+objects:
+  - respondents: DADict
+---
+comment: |
+        respondents.addObject(DAObject, user_info().email)
+initial: True
+code: |
+  multi_user = True
+  if user_logged_in():
+    if user_info().email not in respondents:
+      respondents.setObject(user_info().email, DAObject)
+    user = respondents[user_info().email]
+    final_page
+  else:
+    must_be_logged_in_page
+---
+sets: final_page
+question: |
+  <%
+    cat_count = 0
+    for email in respondents:
+      respondent = respondents[email]
+      if respondent is user or hasattr(respondent, 'number_of_cats'):
+        cat_count += respondent.number_of_cats
+  %>
+  % if cat_count == 0:
+  There are zero cats so far.
+  % elif cat_count == 1:
+  There is only one cat so far.
+  % else:
+  There are ${ cat_count } cats in all.
+  % endif
+subquestion: |
+  Share this link with others!
+
+  [${ interview_url() }](${ interview_url() })
+buttons:
+  - Check: refresh
+---
+generic object: DAObject
+question: How many cats do you have?
+fields:
+  - Number of cats: x.number_of_cats
+    datatype: integer
+---
+sets: must_be_logged_in_page
+question: Please log in
+subquestion: |
+  Please click "Sign in" to continue.  If you do not have
+  an account, you can register for one.
+buttons:
+  - Sign in: signin
+...

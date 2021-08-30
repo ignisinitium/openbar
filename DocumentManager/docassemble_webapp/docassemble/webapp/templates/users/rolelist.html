@@ -1,0 +1,14 @@
+{% extends 'base_templates/page_base_half.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-lg-8">
+{{ privilegelist|safe }}
+  </div>
+</div>
+
+<a class="btn {{ config['BUTTON_STYLE'] }}primary {{ config['BUTTON_CLASS'] }}" href="{{ url_for('add_privilege') }}">{{ word('Add a new privilege') }}</a>
+<a class="btn {{ config['BUTTON_STYLE'] }}secondary {{ config['BUTTON_CLASS'] }}" href="{{ url_for('user_list') }}">{{ word('Back') }}</a>
+
+{% endblock %}

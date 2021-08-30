@@ -1,0 +1,25 @@
+metadata:
+  title: Name in Mako template
+  documentation: "https://docassemble.org/docs/objects.html#Name"
+  example start: 2
+  example end: 2
+---
+objects:
+  - company: Person
+---
+question: |
+  Do you wish to sue ${ company }?
+yesno: user_wants_to_sue
+---
+question: |
+  What is the name of the company?
+fields:
+  - Company name: company.name.text
+---
+mandatory: True
+question: |
+  % if user_wants_to_sue:
+  You will need a lawyer.
+  % else:
+  It's always good to avoid litigation.
+  % endif

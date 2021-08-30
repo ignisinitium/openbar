@@ -1,0 +1,61 @@
+---
+graphics: true
+subparagraph: true
+numbersections: true
+standard-header-includes:
+  - \usepackage{setspace}
+  - \usepackage{xhfill}
+  - \usepackage{fancyhdr}
+  - \usepackage{indentfirst}
+  - \usepackage{ragged2e}
+  - \usepackage{longtable}
+  - \usepackage{array}
+  - \usepackage{pdfpages}
+  - \usepackage{lastpage}
+  - \usepackage{xspace}
+  - \usepackage[none]{hyphenat}
+  - \usepackage[linewidth=1pt]{mdframed}
+  - \renewcommand{\headrulewidth}{0pt}
+  - \renewcommand{\thesection}{\Roman{section}.} 
+  - \renewcommand{\thesubsection}{\Alph{subsection}.}
+  - \renewcommand{\thesubsubsection}{\arabic{subsubsection}.}
+  - \renewcommand{\theparagraph}{\alph{paragraph}.}
+  - \renewcommand{\thesubparagraph}{\roman{subparagraph}.}
+  - \usepackage{titlesec}
+  - \titleformat{\section}{\bfseries}{\thesection}{1em}{}
+  - \titleformat{\subsection}{\bfseries}{\thesubsection}{1em}{}
+  - \titleformat{\subsubsection}{\bfseries}{\thesubsubsection}{1em}{}
+  - \titleformat{\paragraph}{\bfseries}{\theparagraph}{1em}{}
+  - \titleformat{\subparagraph}{\bfseries}{\thesubparagraph}{1em}{}
+  - \titlespacing*{\section}{0pt}{0pt}{0pt}
+  - \titlespacing*{\subsection}{3em}{0pt}{0pt}
+  - \titlespacing*{\subsubsection}{6em}{0pt}{0pt}
+  - \titlespacing*{\paragraph}{9em}{0pt}{0pt}
+  - \titlespacing*{\subparagraph}{12em}{0pt}{0pt}
+  - \newcommand{\verytopskip}{0in}
+  - \newcommand{\myemdash}{---}
+  - \newcommand{\myendash}{--}
+  - \newcommand{\myhyphen}{-}
+  - \newcommand{\nonbreakingspace}{~}
+  - \newcommand{\manualindent}{\hspace{0.5in}}
+  - \newcommand{\manuallinebreak}{\\ }
+  - \newcommand{\myshow}[1]{#1}
+  - \newcommand{\myxspace}{\xspace}
+  - \newcommand{\redactword}[1]{\rule[\dimexpr-\fontchardp\font`q]{\widthof{#1}}{\dimexpr\fontcharht\font`B+\fontchardp\font`q}}
+  - \newcommand{\myskipline}{\vspace*{\myfontsize}}
+  - \newcommand{\mynoindent}{\noindent}
+  - \usepackage{enumitem}
+  - \newenvironment{mytitle}{\bfseries\centering }{\par}
+  - \setlength{\parindent}{0in}
+  - \setlength{\RaggedRightParindent}{\parindent}
+  - \setlength{\parskip}{0pt}
+  - \setlist[trivlist]{topsep=0pt,partopsep=0pt}
+  - \renewcommand{\labelitemi}{\textbullet}
+  - \renewcommand{\labelitemii}{--}
+  - \renewcommand{\labelitemiii}{\textbullet}
+  - \renewcommand{\labelitemiv}{--}
+standard-include-before:
+  - \RaggedRight
+  - \myfontfamily
+  - \sloppy
+...

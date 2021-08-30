@@ -1,0 +1,21 @@
+metadata:
+  title: Import names from module
+  documentation: "https://docassemble.org/docs/initial.html#modules"
+  comment: |
+    The json module provides the function
+    "dumps()"
+---
+modules:
+  - json
+---
+code: |
+  my_list = list()
+  my_list.append("apple")
+  my_list.append("orange")
+  my_list.append(["peach", "pear"])
+---
+question: All done
+subquestion: |
+  Your list in JSON format looks like
+  `${ dumps(my_list) }`
+mandatory: True

@@ -1,0 +1,28 @@
+metadata:
+  title: Define objects
+  documentation: "https://docassemble.org/docs/initial.html#objects"
+---
+objects:
+  - hero: Individual
+  - villain: Individual
+---
+generic object: Individual
+question: |
+  What is ${ x.object_possessive('name') }?
+fields:
+  - First Name: x.name.first
+    default: ${ x.first_name_hint() }
+  - Middle Name: x.name.middle
+    required: False
+  - Last Name: x.name.last
+    default: ${ x.last_name_hint() }
+  - Suffix: x.name.suffix
+    required: False
+    code: |
+      name_suffix()
+---
+question: End of interview
+subquestion: |
+  The hero is ${ hero } and the villain
+  is ${ villain }.
+mandatory: True

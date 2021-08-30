@@ -1,0 +1,20 @@
+metadata:
+  title: Ordinal numbers
+  example start: 2
+  example end: 2
+  documentation: "https://docassemble.org/docs/functions.html#ordinal_number"
+---
+modules:
+  - random
+---
+question: |
+  The ${ ordinal_number(toads) }
+  toad is here to see you.
+buttons:
+  - Restart: restart
+sets: all_done
+---
+initial: True
+code: |
+  toads = int(1 + random()*16)
+  need(all_done)

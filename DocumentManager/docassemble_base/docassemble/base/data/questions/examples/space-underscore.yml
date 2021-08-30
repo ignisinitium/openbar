@@ -1,0 +1,17 @@
+metadata:
+  title: Space to underscore
+  documentation: "https://docassemble.org/docs/functions.html#space_to_underscore"
+---
+question: |
+  Removing spaces
+subquestion: |
+  Your book is *${ book }* and
+  without underscores, it is
+  ${ space_to_underscore(book) }.
+sets: all_done
+---
+code: |
+  book = "Cat in the Hat"
+---
+mandatory: True
+code: all_done

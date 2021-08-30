@@ -1,0 +1,25 @@
+metadata:
+  title: Pulldown
+  documentation: "https://docassemble.org/docs/fields.html#fields"
+---
+question: |
+  Describe yourself.
+fields:
+  - Level of education: education
+    choices:
+      - High School
+      - College
+      - Graduate School
+  - Favorite fruit: favorite_fruit
+    choices:
+      - Apple: apples
+      - Pear: pears
+      - Strawberry: strawberries
+---
+question: Result of question
+subquestion: |
+  Your favorite fruit is
+  ${ favorite_fruit }, which is not
+  surprising given that you have only
+  a ${ education} education.
+mandatory: True

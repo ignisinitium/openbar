@@ -1,0 +1,50 @@
+metadata:
+  title: Table block
+  short title: Table
+  documentation: "https://docassemble.org/docs/initial.html#table"
+  example start: 3
+  example end: 4
+---
+objects:
+  - fruit: DAList
+---
+mandatory: true
+code: |
+  fruit.object_type = Thing
+  fruit.there_are_any = True
+---
+code: |
+  thing = "Fruit"
+---
+table: fruit_table
+rows: fruit
+columns:
+  - header: |
+      ${ thing } Name
+    cell: |
+      row_item.name
+  - header: |
+      Number of Seeds
+    cell: |
+      row_item.seeds
+---
+mandatory: True
+question: |
+  Information about fruit
+subquestion: |
+  Here is a fruity summary.
+
+  ${ fruit_table }
+---
+question: |
+  What fruit should be added to the list?
+fields:
+  - Fruit: fruit[i].name.text
+  - Number of seeds: fruit[i].seeds
+    datatype: integer
+    min: 0
+---
+question: |
+  So far, the fruits include ${ fruit }.
+  Are there any others?
+yesno: fruit.there_is_another

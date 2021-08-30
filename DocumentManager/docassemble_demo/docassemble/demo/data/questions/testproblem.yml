@@ -1,0 +1,68 @@
+---
+modules:
+  - docassemble.base.legal
+  - docassemble.demo.attorney
+---
+objects:
+  - user: Individual
+---
+initial: True
+code: |
+  set_info(user=user, role='user')
+---
+mandatory: True
+code: |
+  need(map_of_organizations)
+---
+sets: map_of_organizations
+question: Organizations that can help you
+subquestion: |
+  ${ map_of(user, organizations_handling(problem=legal_problem, county=user.address.county)) }
+---
+question: |
+  What is your legal problem?
+field: legal_problem
+choices:
+  - code: |
+      problem_types()
+---
+generic object: Address
+code: |
+  x.county = None
+---
+generic object: Address
+sets:
+  - x.county
+  - x.country
+  - x.neighborhood
+code: |
+  x.geocode()
+---
+generic object: Individual
+question: |
+  In what county ${ x.do_question('live') }?
+fields:
+  - County: x.address.county
+---
+generic object: Individual
+sets:
+  - x.address.county
+  - x.address.country
+  - x.address.neighborhood
+code: |
+  x.address.geocode()
+---
+generic object: Individual
+question: |
+  Where ${ x.do_question('live') }?
+fields:
+  - Address: x.address.address
+  - Unit: x.address.unit
+    required: False
+  - City: x.address.city
+  - State: x.address.state
+    code: |
+      us.states.mapping('abbr', 'name')
+  - Zip: x.address.zip
+    required: False
+---

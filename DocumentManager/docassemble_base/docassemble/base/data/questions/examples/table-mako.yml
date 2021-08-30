@@ -1,0 +1,39 @@
+metadata:
+  title: Table with Mako
+  short title: Table
+  documentation: "https://docassemble.org/docs/initial.html#table"
+  example start: 3
+  example end: 3
+---
+objects:
+  - fruit: DAList
+---
+mandatory: true
+code: |
+  fruit.object_type = Thing
+  fruit.there_are_any = True
+---
+mandatory: True
+question: |
+  Information about fruit
+subquestion: |
+  Here is a fruity summary.
+
+  Fruit Name     |Number of Seeds
+  ---------------|----------------
+  % for item in fruit:
+  ${ item.name } | ${ item.seeds }
+  % endfor
+---
+question: |
+  What fruit should be added to the list?
+fields:
+  - Fruit: fruit[i].name.text
+  - Number of seeds: fruit[i].seeds
+    datatype: integer
+    min: 0
+---
+question: |
+  So far, the fruits include ${ fruit }.
+  Are there any others?
+yesno: fruit.there_is_another

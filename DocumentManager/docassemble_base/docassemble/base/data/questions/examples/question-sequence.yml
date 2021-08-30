@@ -1,0 +1,48 @@
+metadata:
+  title: Question sequence
+  short title: Sequence
+  example start: 1
+  example end: 8
+  documentation: "https://docassemble.org/docs/logic.html#mandatory"
+---
+mandatory: True
+question: |
+  Let's think about apples.
+fields:
+  - "Are apples good?": question_one_a
+    datatype: yesnoradio
+  - "Your favorite variety": question_one_b
+---
+mandatory: True
+question: |
+  Are peaches good?
+yesno: question_two
+---
+mandatory: True
+question: |
+  Are turnips good?
+yesno: question_three
+---
+mandatory: True
+question: |
+  Is linoleum good?
+yesno: question_four
+---
+mandatory: True
+question: |
+  Are automobiles good?
+yesno: question_five
+---
+mandatory: True
+question: |
+  Is furniture good?
+yesno: question_six
+---
+mandatory: True
+question: |
+  Was this interview good?
+yesno: question_seven
+---
+mandatory: True
+question: |
+  Thanks for answering my questions!

@@ -1,0 +1,40 @@
+metadata:
+  title: Recipe
+  documentation: "https://docassemble.org/docs/objects.html"
+  example start: 1
+  example end: 6
+---
+modules:
+  - .objects
+---
+objects:
+  - submission: Recipe
+---
+mandatory: True
+question: |
+  Recipe for ${ submission.name }
+subquestion: |
+  ${ submission.summary() }
+---
+generic object: Recipe
+question: |
+  What do you want to cook?
+fields:
+  - Food: x.name
+---
+generic object: Recipe
+question: |
+  What are the ingredients in
+  ${ x.name }?
+fields:
+  - no label: x.ingredients
+    input type: area
+---
+generic object: Recipe
+question: |
+  What are the instructions
+  for cooking ${ x.name }?
+fields:
+  - no label: x.instructions
+    input type: area
+

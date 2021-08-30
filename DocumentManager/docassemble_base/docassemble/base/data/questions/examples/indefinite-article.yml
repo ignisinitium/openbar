@@ -1,0 +1,24 @@
+metadata:
+  title: Indefinite article
+  documentation: "https://docassemble.org/docs/functions.html#indefinite_article"
+---
+question: |
+  Would you prefer to have
+  ${ indefinite_article(fruit) }
+  as opposed to
+  ${ indefinite_article(vegetable) }?
+yesno: prefer_fruit
+---
+question: |
+  % if prefer_fruit:
+  You would prefer the ${ fruit }
+  % else:
+  You would prefer the ${ vegetable }.
+  % endif
+sets: all_done
+---
+mandatory: True
+code: |
+  fruit = "apple"
+  vegetable = "squash"
+  need(all_done)

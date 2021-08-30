@@ -1,0 +1,58 @@
+metadata:
+  title: Cron test background
+---
+mandatory: True
+code: |
+  multi_user = True
+  allow_cron = True
+  status = 'normal'
+  counter = 0
+---
+initial: True
+code: |
+  counter += 1
+  process_action()
+---
+event: cron_weekly
+code: |
+  import sys
+  sys.stderr.write("Should delete this.\n")
+  command('exit')
+---
+event: cron_daily_background
+code: |
+  import sys
+  sys.stderr.write("I am a background cron job and counter is " + str(counter) + "\n")
+  background_response_action('bg_response', ans=555+counter)
+---
+event: bg_response
+code: |
+  answer = action_argument('ans')
+  import sys
+  sys.stderr.write("The new counter is " + str(answer) + "\n")
+  counter = answer
+  background_response()
+---
+event: cron_hourly
+code: |
+  response("Cron hourly was called.  Counter is ${ counter }.")
+---
+event: set_status
+code: |
+  if 'status' in action_arguments():
+    status = action_argument('status')
+  response(status)
+---
+mandatory: True
+question: |
+  The current status is ${ status } and the counter is ${ counter }.
+subquestion: |
+  Set the status to:
+
+  * [normal](${ interview_url_action('set_status', status='normal') })
+  * [danger](${ interview_url_action('set_status', status='danger') })
+  * [critical](${ interview_url_action('set_status', status='critical') })
+
+  To read the status without changing it, use:
+
+  * [this](${ interview_url_action('set_status') })

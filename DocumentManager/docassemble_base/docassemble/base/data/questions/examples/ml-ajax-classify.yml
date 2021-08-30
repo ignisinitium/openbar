@@ -1,0 +1,35 @@
+metadata:
+  title: Machine learning
+  example start: 1
+  example end: 5
+---
+code: |
+  ml = SimpleTextMachineLearner(group_id='sug')
+---
+initial: True
+code: |
+  if defined('classification'):
+    entry_to_classify.classify(classification)
+    del classification
+  entry_to_classify = ml.one_unclassified_entry()
+  if entry_to_classify is not None:
+    need(classification)
+---
+reconsider: True
+code: |
+  current_keys = " ".join(map(lambda x: '<a class="mysug btn btn-primary">' + str(x) + '</a>', ml.dependent_in_use()))
+---
+question: |
+  How should this be classified?
+subquestion: |
+  > ${ entry_to_classify.independent }
+
+  ${ current_keys }.
+fields:
+  - no label: classification
+---
+mandatory: True
+question: |
+  There is nothing left to classify.
+buttons:
+  - Check again: refresh

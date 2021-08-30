@@ -1,0 +1,514 @@
+$if(pdfa)$
+\begin{filecontents*}{\jobname.xmpdata}
+\Title{$title-meta$}
+\Author{$author-meta$}
+\Keywords{docassemble}
+\Publisher{docassemble}
+\end{filecontents*}
+$endif$
+\documentclass[$if(fontsize)$$fontsize$$else$12pt$endif$,$if(lang)$$lang$,$endif$$if(papersize)$$papersize$$else$letterpaper$endif$$for(classoption)$,$classoption$$sep$$endfor$]{$if(documentclass)$$documentclass$$else$article$endif$}
+\usepackage{ifxetex,ifluatex}
+\ifluatex
+\usepackage{luatexbase}
+\fi
+\usepackage{filecontents}
+\usepackage{ifthen}
+$if(pdfa)$
+\usepackage{pdfx}
+$endif$
+\newboolean{usesfirstheader}
+\setboolean{usesfirstheader}{false}
+\newboolean{usesfirstfooter}
+\setboolean{usesfirstfooter}{false}
+\newboolean{usesheader}
+\setboolean{usesheader}{false}
+\newboolean{usesfooter}
+\setboolean{usesfooter}{false}
+$if(FirstFooterLeft)$
+\setboolean{usesfirstfooter}{true}
+$endif$
+$if(FirstFooterRight)$
+\setboolean{usesfirstfooter}{true}
+$endif$
+$if(FirstFooterCenter)$
+\setboolean{usesfirstfooter}{true}
+$endif$
+$if(FirstHeaderLeft)$
+\setboolean{usesfirstheader}{true}
+$endif$
+$if(FirstHeaderRight)$
+\setboolean{usesfirstheader}{true}
+$endif$
+$if(FirstHeaderCenter)$
+\setboolean{usesfirstheader}{true}
+$endif$
+$if(FooterLeft)$
+\setboolean{usesfooter}{true}
+$endif$
+$if(FooterRight)$
+\setboolean{usesfooter}{true}
+$endif$
+$if(FooterCenter)$
+\setboolean{usesfooter}{true}
+$endif$
+$if(HeaderLeft)$
+\setboolean{usesheader}{true}
+$endif$
+$if(HeaderRight)$
+\setboolean{usesheader}{true}
+$endif$
+$if(HeaderCenter)$
+\setboolean{usesheader}{true}
+$endif$
+$if(SansSerif)$
+\newcommand{\myfontfamily}{\sffamily}
+$else$
+\newcommand{\myfontfamily}{\rmfamily}
+$endif$
+\newcommand{\myfontsize}{$if(fontsize)$$fontsize$$else$12pt$endif$}
+
+$if(linestretch)$
+\usepackage{setspace}
+\setstretch{$linestretch$}
+$endif$
+\usepackage{amssymb,amsmath}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+$if(fontfamily)$
+\usepackage{$fontfamily$}
+$else$
+\usepackage{mathptmx}
+$endif$
+$if(euro)$
+  \usepackage{eurosym}
+$endif$
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+$if(fontfamily)$
+  \setmainfont{$fontfamily$}
+$else$
+  \setmainfont{Times New Roman}
+$endif$
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+$if(mainfont)$
+    \setmainfont{$mainfont$}
+$endif$
+$if(sansfont)$
+    \setsansfont{$sansfont$}
+$endif$
+$if(monofont)$
+    \setmonofont[Mapping=tex-ansi]{$monofont$}
+$endif$
+$if(mathfont)$
+    \setmathfont(Digits,Latin,Greek){$mathfont$}
+$endif$
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{\usepackage{microtype}}{}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\epstopdfsetup{outdir=$latextmpdir$}
+\usepackage{calc}
+$if(geometry)$
+\usepackage[$for(geometry)$$geometry$$sep$,$endfor$]{geometry}
+$else$
+\usepackage[left=1in,right=1in,top=1in,bottom=1in,heightrounded]{geometry}
+$endif$
+%\newcommand{\headerlines}{1}
+%$if(HeaderLines)$
+%\renewcommand{\headerlines}{$HeaderLines$}
+%$endif$
+%\ifthenelse{\boolean{usesheader} \OR \boolean{usesfirstheader}}{\geometry{headheight=\baselineskip*\real{\headerlines}}}{\geometry{headsep=0pt,headheight=0pt}}
+
+\newlength{\defaulttopmargin}
+
+\setlength{\defaulttopmargin}{1in}
+$if(TopMargin)$
+\setlength{\defaulttopmargin}{$TopMargin$}
+$else$
+\setlength{\defaulttopmargin}{1in}
+$endif$
+
+\newlength{\defaultbottommargin}
+
+\setlength{\defaultbottommargin}{1in}
+$if(BottomMargin)$
+\setlength{\defaultbottommargin}{$BottomMargin$}
+$else$
+\setlength{\defaultbottommargin}{1in}
+$endif$
+\newlength{\defaultheadheight}
+\setlength{\defaultheadheight}{\headheight}
+$if(FooterSkip)$
+\geometry{footskip=$FooterSkip$}
+$endif$
+$if(natbib)$
+\usepackage{natbib}
+\bibliographystyle{$if(biblio-style)$$biblio-style$$else$plainnat$endif$}
+$endif$
+$if(biblatex)$
+\usepackage{biblatex}
+$if(biblio-files)$
+\bibliography{$biblio-files$}
+$endif$
+$endif$
+$if(listings)$
+\usepackage{listings}
+$endif$
+$if(lhs)$
+\lstnewenvironment{code}{\lstset{language=Haskell,basicstyle=\small\ttfamily}}{}
+$endif$
+$if(highlighting-macros)$
+$highlighting-macros$
+$endif$
+$if(verbatim-in-note)$
+\usepackage{fancyvrb}
+$endif$
+$if(tables)$
+\usepackage{longtable,booktabs}
+$endif$
+$if(graphics)$
+\usepackage{graphicx}
+\makeatletter
+%\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+%\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+%\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+$endif$
+$if(pdfa)$
+$else$
+\ifxetex
+  \usepackage[setpagesize=false, unicode=false, xetex]{hyperref}
+\else
+  \usepackage[unicode=true]{hyperref}
+\fi
+$endif$
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            pdfauthor={$author-meta$},
+            pdftitle={$title-meta$},
+            $if(pdfa)$
+            unicode=false,
+            linktoc=none,
+            pdfa,
+            $endif$
+            colorlinks=true,
+            citecolor=$if(citecolor)$$citecolor$$else$blue$endif$,
+            urlcolor=$if(urlcolor)$$urlcolor$$else$blue$endif$,
+            linkcolor=$if(linkcolor)$$linkcolor$$else$magenta$endif$,
+            pdfborder={0 0 0}}
+\urlstyle{same}  % don't use monospace font for urls
+$if(links-as-notes)$
+% Make links footnotes instead of hotlinks:
+\renewcommand{\href}[2]{#2\footnote{\url{#1}}}
+$endif$
+$if(strikeout)$
+\usepackage[normalem]{ulem}
+% avoid problems with \sout in headers with hyperref:
+\pdfstringdefDisableCommands{\renewcommand{\sout}{}}
+$endif$
+\setlength{\parindent}{0pt}
+%\setlength{\headheight}{0pt}
+%\setlength{\headsep}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+$if(numbersections)$
+\setcounter{secnumdepth}{5}
+$else$
+\setcounter{secnumdepth}{0}
+$endif$
+$if(subparagraph)$
+$else$
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+$endif$
+$if(dir)$
+\ifxetex
+% load bidi as late as possible as it modifies e.g. graphicx
+$if(latex-dir-rtl)$
+\usepackage[RTLdocument]{bidi}
+$else$
+\usepackage{bidi}
+$endif$
+\fi
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+\TeXXeTstate=1
+\newcommand{\RL}[1]{\beginR #1\endR}
+\newcommand{\LR}[1]{\beginL #1\endL}
+%\newcommand*\smallblacksquare{\mathbin{\vcenter{\hbox{\rule{.8ex}{.8ex}}}}}
+\newenvironment{RTL}{\beginR}{\endR}
+\newenvironment{LTR}{\beginL}{\endL}
+\fi
+$endif$
+$if(verbatim-in-note)$
+\VerbatimFootnotes % allows verbatim text in footnotes
+$endif$
+$if(lang)$
+\ifxetex
+  \usepackage{polyglossia}
+  \setmainlanguage{$mainlang$}
+\else
+  \usepackage[$lang$]{babel}
+\fi
+$endif$
+
+$if(title)$
+\title{$title$}
+$endif$
+$if(subtitle)$
+\subtitle{$subtitle$}
+$endif$
+$if(author)$
+\author{$for(author)$$author$$sep$ \and $endfor$}
+$endif$
+$if(date)$
+\date{$date$}
+$endif$
+$for(standard-header-includes)$
+$standard-header-includes$
+$endfor$
+$if(HangingIndent)$
+$if(SingleSpacing)$
+\setlist[enumerate,1]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=1em,itemsep=0pt}
+\setlist[enumerate,2]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=1em,itemsep=0pt}
+\setlist[enumerate,3]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=1em,itemsep=0pt}
+\setlist[enumerate,4]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=1em,itemsep=0pt}
+\setlist[enumerate,5]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=1em,itemsep=0pt}
+$else$
+\setlist[enumerate,1]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,2]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,3]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,4]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,5]{leftmargin=0.5in,itemindent=0in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+$endif$
+$else$
+\setlist[enumerate,1]{leftmargin=0in,itemindent=1in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,2]{leftmargin=0.5in,itemindent=1in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,3]{leftmargin=0.5in,itemindent=1in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,4]{leftmargin=0.5in,itemindent=1in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[enumerate,5]{leftmargin=0.5in,itemindent=1in,align=left,labelwidth=0.5in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+$endif$
+\setlist[itemize,1]{leftmargin=0.75in,itemindent=0in,align=left,labelwidth=0.25in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[itemize,2]{leftmargin=0.25in,itemindent=0in,align=left,labelwidth=0.25in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[itemize,3]{leftmargin=0.25in,itemindent=0in,align=left,labelwidth=0.25in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[itemize,4]{leftmargin=0.25in,itemindent=0in,align=left,labelwidth=0.25in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+\setlist[itemize,5]{leftmargin=0.25in,itemindent=0in,align=left,labelwidth=0.25in,labelsep=0in,topsep=0pt,partopsep=0pt,parsep=0pt,itemsep=0pt}
+$for(header-includes)$
+$header-includes$
+$endfor$
+
+\fancypagestyle{basicstyle}{
+\fancyfoot[CE,CO]{\myfontfamily -~\thepage~-}
+\fancyhf{}
+$if(FooterLeft)$
+\fancyfoot[LE,LO]{\myfontfamily $FooterLeft$}
+$endif$
+$if(FooterRight)$
+\fancyfoot[RE,RO]{\myfontfamily $FooterRight$}
+$endif$
+$if(FooterCenter)$
+\fancyfoot[CE,CO]{\myfontfamily $FooterCenter$}
+$endif$
+$if(HeaderLeft)$
+\fancyhead[LE,LO]{\myfontfamily $HeaderLeft$}
+$endif$
+$if(HeaderRight)$
+\fancyhead[RE,RO]{\myfontfamily $HeaderRight$}
+$endif$
+$if(HeaderCenter)$
+\fancyhead[CE,CO]{\myfontfamily $HeaderCenter$}
+$endif$
+}
+
+\fancypagestyle{firststyle}{
+\fancyhf{}
+$if(FirstFooterLeft)$
+\fancyfoot[LE,LO]{\myfontfamily $FirstFooterLeft$}
+$endif$
+$if(FirstFooterRight)$
+\fancyfoot[RE,RO]{\myfontfamily $FirstFooterRight$}
+$endif$
+$if(FirstFooterCenter)$
+\fancyfoot[CE,CO]{\myfontfamily $FirstFooterCenter$}
+$endif$
+$if(FirstHeaderLeft)$
+\fancyhead[LE,LO]{\myfontfamily $FirstHeaderLeft$}
+$endif$
+$if(FirstHeaderRight)$
+\fancyhead[RE,RO]{\myfontfamily $FirstHeaderRight$}
+$endif$
+$if(FirstHeaderCenter)$
+\fancyhead[CE,CO]{\myfontfamily $FirstHeaderCenter$}
+$endif$
+}
+
+\newsavebox{\headerbox}
+\newlength{\newtop}
+\setlength{\newtop}{\defaulttopmargin}
+\newlength{\maxheaderfirst}
+\setlength{\maxheaderfirst}{0pt}
+\newlength{\thisheaderheight}
+
+$if(FirstHeaderLeft)$
+\savebox{\headerbox}{\parbox{\textwidth}{\myfontfamily $FirstHeaderLeft$}}
+\settototalheight{\thisheaderheight}{\usebox{\headerbox}}
+\ifthenelse{\lengthtest{\thisheaderheight>\maxheaderfirst}}{\setlength{\maxheaderfirst}{\thisheaderheight}}{}
+$endif$
+$if(FirstHeaderRight)$
+\savebox{\headerbox}{\parbox{\textwidth}{\myfontfamily $FirstHeaderRight$}}
+\settototalheight{\thisheaderheight}{\usebox{\headerbox}}
+\ifthenelse{\lengthtest{\thisheaderheight>\maxheaderfirst}}{\setlength{\maxheaderfirst}{\thisheaderheight}}{}
+$endif$
+$if(FirstHeaderCenter)$
+\savebox{\headerbox}{\parbox{\textwidth}{\myfontfamily $FirstHeaderCenter$}}
+\settototalheight{\thisheaderheight}{\usebox{\headerbox}}
+\ifthenelse{\lengthtest{\thisheaderheight>\maxheaderfirst}}{\setlength{\maxheaderfirst}{\thisheaderheight}}{}
+$endif$
+
+\newlength{\maxheader}
+\setlength{\maxheader}{0pt}
+
+$if(HeaderLeft)$
+\savebox{\headerbox}{\parbox{\textwidth}{\myfontfamily $HeaderLeft$}}
+\settototalheight{\thisheaderheight}{\usebox{\headerbox}}
+\ifthenelse{\lengthtest{\thisheaderheight>\maxheader}}{\setlength{\maxheader}{\thisheaderheight}}{}
+$endif$
+$if(HeaderRight)$
+\savebox{\headerbox}{\parbox{\textwidth}{\myfontfamily $HeaderRight$}}
+\settototalheight{\thisheaderheight}{\usebox{\headerbox}}
+\ifthenelse{\lengthtest{\thisheaderheight>\maxheader}}{\setlength{\maxheader}{\thisheaderheight}}{}
+$endif$
+$if(HeaderCenter)$
+\savebox{\headerbox}{\parbox{\textwidth}{\myfontfamily $HeaderCenter$}}
+\settototalheight{\thisheaderheight}{\usebox{\headerbox}}
+\ifthenelse{\lengthtest{\thisheaderheight>\maxheader}}{\setlength{\maxheader}{\thisheaderheight}}{}
+$endif$
+
+\newlength{\maxheaderboth}
+\setlength{\maxheaderboth}{\maxheader}
+\ifthenelse{\lengthtest{\maxheaderfirst>\maxheader}}{\setlength{\maxheaderboth}{\maxheaderfirst}}{}
+
+\newlength{\backup}
+\setlength\backup{0pt}
+
+\ifthenelse{\lengthtest{\maxheaderboth>\defaultheadheight}}{
+  \addtolength{\newtop}{\maxheaderboth-\defaultheadheight}
+  \ifthenelse{\lengthtest{\maxheaderfirst<\maxheader}}{
+    \ifthenelse{\lengthtest{\maxheaderfirst=0pt}}{%
+      \setlength{\backup}{\defaultheadheight-\maxheaderboth}
+    }{
+      \setlength{\backup}{\maxheaderfirst-\maxheader}
+    }
+  }{
+  }
+}{
+}
+
+\ifthenelse{\boolean{usesheader} \OR \boolean{usesfirstheader}}{
+  \addtolength{\maxheaderboth}{1.76pt}
+  \geometry{top=\newtop,headheight=\maxheaderboth}
+}{
+  %\geometry{headsep=0pt,headheight=0pt}
+}
+
+\pagestyle{basicstyle}
+
+\begin{document}
+\renewcommand*\familydefault{\sfdefault}
+\normalfont
+\ifthenelse{\lengthtest{\backup<0pt}}{\addtolength{\backup}{-2\baselineskip}\vspace*{\backup}\par}{}
+
+\newlength{\myindentamount}
+$if(IndentationAmount)$
+\setlength{\myindentamount}{$IndentationAmount$}
+$else$
+\setlength{\myindentamount}{0.5in}
+$endif$
+
+$if(SingleSpacing)$
+\setlength{\parskip}{\myfontsize}
+$else$
+\doublespacing
+\setlength{\parindent}{\myindentamount}
+\setlength{\RaggedRightParindent}{\parindent}
+$endif$
+
+$if(Indentation)$
+\setlength{\parindent}{\myindentamount}
+\setlength{\RaggedRightParindent}{\parindent}
+$endif$
+
+$if(title)$
+\maketitle
+$endif$
+$if(abstract)$
+\begin{abstract}
+$abstract$
+\end{abstract}
+$endif$
+
+$for(standard-include-before)$
+$standard-include-before$
+
+$endfor$
+
+$for(include-before)$
+$include-before$
+
+$endfor$
+
+$if(toc)$
+{
+\hypersetup{linkcolor=black}
+\setcounter{tocdepth}{$toc-depth$}
+\tableofcontents
+}
+$endif$
+\thispagestyle{firststyle}
+
+$body$
+
+$if(natbib)$
+$if(biblio-files)$
+$if(biblio-title)$
+$if(book-class)$
+\renewcommand\bibname{$biblio-title$}
+$else$
+\renewcommand\refname{$biblio-title$}
+$endif$
+$endif$
+\bibliography{$biblio-files$}
+
+$endif$
+$endif$
+$if(biblatex)$
+\printbibliography$if(biblio-title)$[title=$biblio-title$]$endif$
+
+$endif$
+$for(include-after)$
+$include-after$
+
+$endfor$
+\end{document}

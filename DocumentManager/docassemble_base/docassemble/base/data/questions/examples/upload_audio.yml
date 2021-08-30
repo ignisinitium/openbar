@@ -1,0 +1,15 @@
+metadata:
+  title: Upload and listen to audio
+  example start: 1
+  example end: 2
+  documentation: "https://docassemble.org/docs/modifiers.html#audio"
+---
+question: Please record some audio.
+fields:
+  - MP3 file: user_audio_file
+    datatype: file
+---
+question: |
+  Let's listen to what you recorded.
+audio: ${ user_audio_file }
+mandatory: True

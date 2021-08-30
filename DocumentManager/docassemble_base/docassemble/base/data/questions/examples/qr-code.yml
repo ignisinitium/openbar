@@ -1,0 +1,13 @@
+metadata:
+  title: QR code
+  documentation: "https://docassemble.org/docs/functions.html#qr_code"
+---
+question: |
+  Read the news on your mobile
+  phone
+subquestion: |
+  If you have a QR code reader on
+  your phone, point it here:
+
+  ${ qr_code('https://news.google.com') }
+mandatory: True

@@ -1,0 +1,48 @@
+metadata:
+  title: Text alignment
+  documentation: "https://docassemble.org/docs/documents.html#markup"
+---
+question: Here is your document.
+subquestion: It has aligned text.
+attachments:
+  - name: A test document
+    filename: test_document
+    content: |
+      [BOLDCENTER] A Document That
+      Explains Things To You
+
+      This is a big important document.
+      It addresses all of the concerns
+      that you might have with the
+      benefits to which you may be
+      entitled, now, in the future,
+      or in the past, whichever comes
+      first.
+
+      [CENTER] Benefits Summary
+
+      ${ client } is entitled to
+      benefits plan ${ benefits }.
+
+      For more information about the
+      benefits to which you may or may
+      not be entitled, whether on this
+      planet or another planet in the
+      solar system, contact:
+
+      [FLUSHLEFT] Andrea Advocate [BR]
+      123 Riverside Drive [BR]
+      Fort Franklin, AR 92302
+
+      By comparison, this uses the
+      standard Markdown flushleft
+      environment:
+
+      | Andrea Advocate
+      | 123 Riverside Drive
+      | Fort Franklin, AR 92302
+mandatory: True
+---
+code: |
+  client = "Jane Doe"
+  benefits = "G-432"

@@ -1,0 +1,48 @@
+metadata:
+  title: JSON response
+  example start: 1
+  example end: 4
+  documentation: "https://docassemble.org/docs/functions.html#response"
+---
+objects:
+  - user: Individual
+---
+mandatory: True
+code: |
+  multi_user = True
+---
+event: query_fruit
+code: |
+  data = dict(fruit=favorite_fruit, pieces=number_of_pieces)
+  json_response(data)
+---
+mandatory: True
+question: |
+  You currently have
+  ${ nice_number(number_of_pieces) }
+  ${ noun_plural('piece', number_of_pieces) }
+  of
+  ${ noun_singular(favorite_fruit) }.
+subquestion: |
+  Use
+  [this link](${ interview_url_action('query_fruit') })
+  to query the information from
+  another application.
+
+  You can also change the 
+  [fruit](${ url_action('favorite_fruit') })
+  and the
+  [number of pieces](${ url_action('number_of_pieces') }).
+---
+question: |
+  What is your favorite fruit?
+fields:
+  - Fruit: favorite_fruit
+---
+question: |
+  How many pieces of ${ noun_singular(favorite_fruit) }
+  do you have?
+fields:
+  - Pieces: number_of_pieces
+    datatype: integer
+    min: 0

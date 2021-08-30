@@ -1,0 +1,17 @@
+---
+modules:
+  - docassemble.base.legal
+---
+objects:
+  - user: Individual
+---
+question: >-
+  What is your date of birth?
+fields:
+  - no label: user.birthdate
+    datatype: date
+---
+mandatory: True
+question: |
+  You are ${ user.age_in_years() } years old.
+---

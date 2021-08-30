@@ -1,0 +1,18 @@
+metadata:
+  title: Need
+  example start: 3
+  example end: 3
+  documentation: "https://docassemble.org/docs/functions.html#need"
+---
+question: |
+  What is your favorite fruit?
+fields:
+  - no label: fruit
+---
+question: |
+  Done with the interview
+sets: all_done
+---
+mandatory: True
+code: |
+  need(fruit, all_done)

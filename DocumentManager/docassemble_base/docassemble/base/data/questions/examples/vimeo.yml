@@ -1,0 +1,16 @@
+metadata:
+  title: Video with Vimeo
+  documentation: "https://docassemble.org/docs/markup.html#audio and video"
+---
+field: ready_to_proceed
+question: |
+  Welcome to the interview.
+subquestion: |
+  Please watch this introductory video
+  before proceeding with the interview.
+video: |
+  [VIMEO 96044910]
+---
+question: This concludes the interview.
+need: ready_to_proceed
+mandatory: True

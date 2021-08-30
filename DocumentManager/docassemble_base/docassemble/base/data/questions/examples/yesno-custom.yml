@@ -1,0 +1,21 @@
+metadata:
+  title: Custom yes/no
+  documentation: "https://docassemble.org/docs/fields.html#field with buttons"
+---
+question: |
+  Are you satisfied?
+field: user_is_satisfied
+buttons:
+  - "You bet": True
+  - "No way": False
+---
+question: Result of question
+subquestion: |
+  % if user_is_satisfied:
+  Glad to hear it!
+  % else:
+  I'm sorry to hear that.
+  We will strive to do better
+  next time.
+  % endif
+mandatory: True

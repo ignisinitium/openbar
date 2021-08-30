@@ -1,0 +1,24 @@
+metadata:
+  title: User device
+  documentation: "https://docassemble.org/docs/functions.html#device"
+---
+question: |
+  % if device().is_mobile:
+  You are on a phone.
+  % elif device().is_tablet:
+  You are on a tablet.
+  % elif device().is_pc:
+  You are on a PC.
+  % elif device().is_bot:
+  You are a bot.
+  % else:
+  Your device is: ${ device() }.
+  % endif
+subquestion: |
+  % if device().is_touch_capable:
+  You are using a touchscreen device.
+  % else:
+  You are not using a touchscreen device.
+  % endif
+mandatory: True
+

@@ -1,0 +1,18 @@
+metadata:
+  title: Assembling a document
+  documentation: "https://docassemble.org/docs/documents.html#attachments"
+---
+question: Here is your document.
+attachments:
+  - name: Summary of Benefits
+    filename: benefits_summary
+    content: |
+      [BOLDCENTER] Summary of Benefits
+
+      ${ client } is entitled to
+      benefits plan ${ benefits }.
+mandatory: True
+---
+code: |
+  client = "Jane Doe"
+  benefits = "G-432"

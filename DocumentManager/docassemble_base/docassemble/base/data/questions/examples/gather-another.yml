@@ -1,0 +1,46 @@
+metadata:
+  title: Gather
+  short title: Gather
+  documentation: "https://docassemble.org/docs/groups.html#gathering"
+  example start: 1
+  example end: 7
+---
+objects:
+  - fruit: |
+      DAList.using(
+        auto_gather=False,
+        gathered=True)
+comment: |
+  These attributes disable the automatic
+  gathering system.
+---
+mandatory: True
+code: |
+  num_fruits = 0
+  more_fruits = True
+---
+mandatory: True
+code: |
+  while more_fruits:
+    fruit[num_fruits]
+    num_fruits += 1
+    del more_fruits
+---
+question: |
+  Are there more fruits?
+yesno: more_fruits
+---
+question: |
+  What's the ${ ordinal(i) } fruit?
+fields:
+  - Fruit: fruit[i]
+---
+mandatory: True
+question: |
+  Fruits
+subquestion: |
+  The fruits are:
+
+  % for item in fruit:
+  * ${ item }
+  % endfor

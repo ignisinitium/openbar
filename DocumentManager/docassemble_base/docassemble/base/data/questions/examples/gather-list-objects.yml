@@ -1,0 +1,38 @@
+metadata:
+  title: Gathering a list of objects
+  short title: List of objects
+  documentation: "https://docassemble.org/docs/groups.html#list of objects"
+  example start: 1
+  example end: 4
+---
+objects:
+  - location: |
+      DAList.using(
+        object_type=Address,
+        there_are_any=True)
+---
+mandatory: True
+question: |
+  The locations
+subquestion: |
+  % for loc in location:
+  * ${ loc }
+  % endfor
+---
+question: |
+  What is the address of the
+  ${ ordinal(i) } location?
+fields:
+  - Address: location[i].address
+  - Unit: location[i].unit
+    required: False
+  - City: location[i].city
+  - State: location[i].state
+    code: |
+      states_list()
+  - Zip: location[i].zip
+    required: False
+---
+question: |
+  Would you like to add another location?
+yesno: location.there_is_another

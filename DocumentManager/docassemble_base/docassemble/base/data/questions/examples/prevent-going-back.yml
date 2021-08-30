@@ -1,0 +1,18 @@
+metadata:
+  title: Disable back button
+  documentation: "https://docassemble.org/docs/modifiers.html#prevent going back"
+---
+prevent going back: True
+question: |
+  Your application for ${ service }
+  has been submitted.
+mandatory: True
+---
+question: |
+  For what service would you like
+  to apply?
+field: service
+choices:
+  - Tutoring
+  - Resume writing assistance
+

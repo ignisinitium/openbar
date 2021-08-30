@@ -1,0 +1,41 @@
+metadata:
+  title: Mad libs
+  example start: 1
+  example end: 3
+  documentation: "https://docassemble.org/docs/groups.html"
+---
+objects:
+  - adjective: DAList
+  - noun: DAList
+  - person: DAList
+  - place: DAList
+---
+mandatory: True
+question: A funny story
+subquestion: |
+  ${ person[0] } went to ${ place[0] }
+  to buy
+  ${ indefinite_article(noun[0]) }.
+
+  At the ${ place[0] }, there was
+  ${ indefinite_article(adjective[0])}
+  ${ noun[1] }, which tried to zap
+  ${ person[0] }.
+
+  But luckily, ${ person[1] } came out
+  of the back room just in time and
+  lunged at the ${ noun[1] }, thereby
+  saving the day.
+buttons:
+  - Do it again: restart
+---
+generic object: DAList
+question: |
+  % if i == 0:
+  Give me
+  ${ indefinite_article(x.object_name()) }.
+  % else:
+  Give me another ${ x.object_name() }.
+  % endif
+fields:
+  - no label: x[i]

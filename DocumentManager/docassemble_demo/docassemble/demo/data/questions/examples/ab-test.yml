@@ -1,0 +1,13 @@
+metadata:
+  title: A/B Test
+  short title: A/B
+  documentation: "https://docassemble.org/docs/logic.html#multiple interviews redirect"
+---
+mandatory: true
+code: |
+  import random
+  if random.random() < 0.5:
+    url = interview_url(i="docassemble.demo:data/questions/questions.yml")
+  else:
+    url = interview_url(i="docassemble.demo:data/questions/examples/redact-docx.yml")
+  command('exit', url=url)

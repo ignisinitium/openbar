@@ -1,0 +1,9 @@
+metadata:
+  title: Final screen
+  documentation: "https://docassemble.org/docs/logic.html#mandatory"
+---
+question: |
+  Congratulations!
+subquestion: |
+  You are all done with the interview.
+mandatory: True

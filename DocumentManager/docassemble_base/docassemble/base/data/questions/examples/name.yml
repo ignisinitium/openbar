@@ -1,0 +1,24 @@
+metadata:
+  title: Names
+  documentation: "https://docassemble.org/docs/objects.html#Name"
+  example start: 2
+  example end: 3
+---
+objects:
+  - opponent: Person
+---
+question: |
+  What are you fighting?
+field: opponent.name.text
+choices:
+  - the Empire
+  - the Rebel Alliance
+---
+mandatory: True
+question: |
+  You are fighting
+  ${ opponent.name.full() }.
+subquestion: |
+  Your enemy is ${ opponent.name }.
+
+  Your opponent is ${ opponent }.

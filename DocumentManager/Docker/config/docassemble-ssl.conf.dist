@@ -1,0 +1,30 @@
+<IfModule mod_ssl.c>
+    <VirtualHost *:443>
+        ServerAdmin ${DASERVERADMIN}
+        ServerName ${DAHOSTNAME}
+        SSLEngine on
+        SSLCertificateFile /etc/ssl/docassemble/apache.crt
+        SSLCertificateKeyFile /etc/ssl/docassemble/apache.key
+        SSLCertificateChainFile /etc/ssl/docassemble/apache.ca.pem
+        XSendFile on
+        XSendFilePath /usr
+        XSendFilePath /tmp
+	KeepAliveTimeout 10
+        RewriteEngine On
+        RewriteCond %{REQUEST_URI}           ^${DAPOSTURLROOT}ws/socket.io                 [NC]
+        RewriteCond %{QUERY_STRING}          transport=websocket                           [NC]
+        RewriteRule ${DAPOSTURLROOT}ws/(.*)  ws://${DAWEBSOCKETSIP}:${DAWEBSOCKETSPORT}/$1 [P,L]
+        ProxyPass        ${DAPOSTURLROOT}ws/ http://${DAWEBSOCKETSIP}:${DAWEBSOCKETSPORT}/
+        ProxyPassReverse ${DAPOSTURLROOT}ws/ http://${DAWEBSOCKETSIP}:${DAWEBSOCKETSPORT}/
+        WSGIDaemonProcess docassemble.webserver user=www-data group=www-data threads=5
+        WSGIScriptAlias ${DAWSGIROOT} /usr/share/docassemble/webapp/docassemble.wsgi
+        <Directory /usr/share/docassemble/webapp>
+            WSGIProcessGroup docassemble.webserver
+            WSGIApplicationGroup %{GLOBAL}
+            AllowOverride none
+            Require all granted
+        </Directory>
+        ErrorLog /var/log/apache2/error.log
+        CustomLog /var/log/apache2/access.log combined
+    </VirtualHost>
+</IfModule>

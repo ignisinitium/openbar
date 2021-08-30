@@ -1,0 +1,34 @@
+metadata:
+  title: "Set: gathering"
+  short title: "Set: gathering"
+  documentation: "https://docassemble.org/docs/groups.html#gathering"
+  example start: 1
+  example end: 5
+---
+objects:
+  - fruit: DASet
+---
+mandatory: True
+code: |
+  fruit.ask_number = True
+---
+mandatory: True
+question: |
+  There are ${ fruit.number_as_word() }
+  fruits in all.
+subquestion: |
+  The fruit include ${ fruit }.
+---
+question: |
+  How many fruit should be added
+  to the set?
+fields:
+  - Number: fruit.target_number
+    datatype: integer
+    min: 0
+---
+question: |
+  What fruit should be added to
+  the set?
+fields:
+  - Fruit: fruit.new_item

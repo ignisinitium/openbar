@@ -1,0 +1,27 @@
+metadata:
+  title: Menu item
+  example start: 1
+  example end: 3
+  documentation: "https://docassemble.org/docs/special.html#menu_items"
+---
+mandatory: True
+code: |
+  menu_items = [ action_menu_item('Visit Cow', 'see_cow') ]
+---
+event: see_cow
+question: |
+  Moo!
+subquestion: |
+  [FILE cow.jpg]
+  
+  Cow illustration designed by
+  [Freepik](http://www.freepik.com/free-photos-vectors/animal)
+buttons:
+  - Continue: continue
+---
+question: Welcome to the interview
+subquestion: |
+  Check out the menu in the
+  upper-right corner.
+mandatory: True
+

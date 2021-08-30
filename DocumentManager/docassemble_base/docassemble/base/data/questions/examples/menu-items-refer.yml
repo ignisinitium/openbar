@@ -1,0 +1,20 @@
+metadata:
+  title: Several interviews in one
+  short title: Multi-interview
+  documentation: "https://docassemble.org/docs/logic.html#multiple interviews links"
+  example start: 1
+  example end: 2
+---
+mandatory: True
+code: |
+  menu_items = [ {'url': interview_url(i='docassemble.demo:data/questions/interview-about-fruit.yml'),
+                  'label': 'Fruit'},
+                 {'url': interview_url(i='docassemble.demo:data/questions/interview-about-vegetables.yml'),
+                  'label': 'Vegetables'}, 
+                 {'url': interview_url(i='docassemble.demo:data/questions/interview-about-flowers.yml'),
+                  'label': 'Flowers'} ]
+---
+mandatory: True
+question: |
+  Select an option from the
+  menu in the upper right.

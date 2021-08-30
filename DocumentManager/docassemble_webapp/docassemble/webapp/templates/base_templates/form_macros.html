@@ -1,0 +1,158 @@
+{% macro render_file_field(field, label=None, label_visible=True, right_url=None, right_label=None, right_message=None, multiple=False) -%}
+<div class="form-group {% if field.errors %}da-group-has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+  {%- if label_visible %}
+  {% if not label %}{% set label=field.label.text %}{% endif %}
+  <label for="{{ field.id }}">{{ label|safe }}</label>
+  {% endif %}
+  <div class="custom-file">
+    <input alt="{{ word('You can upload a file here') }}" type="file" class="custom-file-input" name="{{ field.id }}" id="{{ field.id }}"{% if multiple %} multiple{% endif %}/>
+    <label class="custom-file-label" for="{{ field.id }}">{{ word("Choose file") }}</label>
+  </div>
+  {% for e in field.errors %}
+  <p class="da-has-error text-danger">{{ e }}</p>
+  {% endfor %}
+</div>
+{%- endmacro %}
+{% macro render_field(field, type=None, label=None, label_visible=True, right_url=None, right_label=None, right_message=None, prelabel=None) %}
+<div class="form-group {% if field.errors %}da-group-has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+  {%- if field.type != 'HiddenField' and label_visible %}
+  {%- if not label %}{% set label=field.label.text %}{% endif %}
+  <label for="{{ field.id }}">{{ label|safe }}</label>
+  {%- endif %}
+  {%- if prelabel %}
+  <div class="input-group">
+    <div class="input-group-prepend">
+      <div class="input-group-text">
+        {{ prelabel }}
+      </div>
+    </div>
+    {{ field(class_='form-control', **kwargs) }}
+  </div>
+  {%- else %}
+  {{ field(class_='form-control', **kwargs) }}
+  {%- endif %}
+  {%- if field.errors %}
+  {%- for e in field.errors %}
+  <p class="da-has-error text-danger">{{ e }}</p>
+  {%- endfor %}
+  {%- endif %}
+  {%- if right_message %}
+  {{ right_message|safe }}
+  {%- endif %}  
+</div>
+{%- endmacro %}
+
+{% macro render_addon_field(field, label=None, label_visible=True, right_url=None, right_label=None, right_message=None, extra=None, extra_class=None) %}
+{%- if not extra_class %}{% set extra_class='' %}{% endif %}
+<div class="input-group {% if field.errors %}da-group-has-error{% endif %} {{ kwargs.pop('class_', '') }}{{ extra_class }}">
+  {%- if field.type != 'HiddenField' and label_visible %}
+  {%- if not label %}{% set label=field.label.text %}{% endif %}
+  <div class="input-group-prepend">
+    <div class="input-group-text">
+    {{ label|safe }}
+    </div>
+  </div>
+  {%- endif %}
+  {{ field(class_='form-control', **kwargs) }}
+  {%- if extra %}
+  {{ extra|safe }}
+  {%- endif %}
+</div>
+{%- if field.errors %}
+{%- for e in field.errors %}
+<p class="da-has-error text-danger">{{ e }}</p>
+{%- endfor %}
+{%- endif %}
+{%- if right_message %}
+{{ right_message|safe }}
+{%- endif %}  
+{%- endmacro %}
+
+{% macro render_checkbox_field(field, label=None) %}
+{%- if not label %}{% set label=field.label.text %}{% endif %}
+<div class="form-group">
+  <div class="form-check">
+    <input class="form-check-input" id="{{ field.id }}" name="{{ field.id }}" type="checkbox" value="y"{% if field.default %}checked="checked"{% endif %} />
+    <label class="form-check-label" for="{{ field.id }}">{{ label }}</label>
+  </div>
+</div>
+{% endmacro %}
+ 
+{% macro render_radio_field(field) -%}
+    {%- for value, label, checked in field.iter_choices() %}
+<div class="form-group">
+  <div class="form-check">
+    <input class="form-check-input" type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
+    <label class="form-check-label" for="{{ field.id }}">{{ label }}</label>
+  </div>
+</div>
+    {%- endfor %}
+{%- endmacro %}
+
+{% macro render_select_field(field) %}
+<div class="form-group {% if field.errors %}da-group-has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+  <label for="{{ field.id }}">{{ field.label.text }}</label>
+  <select class="form-control" name="{{ field.id }}" id="{{ field.id }}">
+  {%- for value, name, checked in field.iter_choices() %}
+    <option value="{{ value }}"{% if checked %} selected="selected"{% endif %}>{{ name }}</option>
+  {%- endfor %}
+  </select>
+  {%- if field.errors %}
+  {%- for e in field.errors %}
+  <p class="da-has-error text-danger">{{ e }}</p>
+  {%- endfor %}
+  {%- endif %}
+</div>
+{%- endmacro %}
+
+{% macro render_multiselect_field(field, undernote=None) %}
+<div class="form-group {% if field.errors %}da-group-has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+  <label for="{{ field.id }}">{{ field.label.text }}</label>
+  <select multiple class="form-control" name="{{ field.id }}" id="{{ field.id }}" name="{{ field.id }}">
+  {%- for value, name, checked in field.iter_choices() %}
+    <option value="{{ value }}"{% if checked %} selected="selected"{% endif %}>{{ name }}</option>
+  {%- endfor %}
+  </select>
+  {%- if field.errors %}
+  {%- for e in field.errors %}
+  <p class="da-has-error text-danger">{{ e }}</p>
+  {%- endfor %}
+  {%- endif %}
+  {%- if undernote %}
+  <small class="form-text text-muted">{{ undernote }}</small>
+  {%- endif %}
+</div>
+{%- endmacro %}
+
+{% macro render_submit_field(field, label=None, id=None, tabindex=None, class=None, title=None, style=None, data=None) %}
+    {%- if not class %}{% set class="btn " + config['BUTTON_STYLE'] + "primary " + config['BUTTON_CLASS'] %}{% endif %}
+    {%- if not label %}{% set label=field.label.text %}{% endif %}<button type="submit" name="{{ field.id }}" {% if id %}id="{{ id }}" {% endif %}class="{{ class }}" value="{{ label }}"{% if tabindex %} tabindex="{{ tabindex }}"{% endif %}{% if title %} title="{{ title }}"{% endif %}{% if style %} style="{{ style }}"{% endif %}{% if data %}{% for key in data %} data-{{ key }}="{{ data[key] }}"{% endfor %}{% endif %}>{{label}}</button>
+{%- endmacro %}
+
+{% macro myrender_field(field, label=None, label_visible=True, right_url=None, right_label=None) %}
+    <div class="control-group {% if field.errors %}da-group-has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+      {%- if field.type != 'HiddenField' and label_visible %}
+        {%- if not label %}
+          {%- set label=field.label.text %}
+        {%- endif %}
+      <label for="{{ field.id }}">{{ label|safe }}</label>
+        {%- endif %}
+      <div class="controls">    
+      {{ field(class_='form-control', **kwargs) }}
+      {%- if field.errors %}
+        {% for e in field.errors %}
+      <p class="da-has-error text-danger">{{ e }}</p>
+        {% endfor %}
+      {%- endif %}
+      </div>    
+    </div>
+{%- endmacro %}
+
+{% macro myrender_submit_field(field, label=None, tabindex=None, id=None) %}
+    {%- if not label %}{% set label=field.label.text %}{% endif %}
+    <button type="submit" {% if id %}id="{{ id }}" {% endif %}class="btn {{ config['BUTTON_STYLE'] }}primary {{ config['BUTTON_CLASS'] }}"{% if tabindex %} tabindex="{{ tabindex }}"{% endif %}>{{ label }}</button>
+{%- endmacro %}
+
+{% macro myrender_hidden_field(field, value="") -%}
+    <input type="hidden" name="{{ field.id }}" id="{{ field.id }}" value="{{value}}">
+{%- endmacro %}

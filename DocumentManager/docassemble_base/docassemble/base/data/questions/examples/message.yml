@@ -1,0 +1,7 @@
+metadata:
+  title: Question generated with code
+  documentation: "https://docassemble.org/docs/functions.html#message"
+---
+code: |
+  message("The interview is over.", "Better luck next time!")
+mandatory: True

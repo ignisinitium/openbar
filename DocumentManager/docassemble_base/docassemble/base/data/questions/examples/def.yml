@@ -1,0 +1,28 @@
+metadata:
+  title: Mako functions
+  example start: 1
+  example end: 2
+  documentation: "https://docassemble.org/docs/initial.html#def"
+---
+def: my_explanation
+mako: |
+  <%def name="explain(fruit)">
+  ${ fruit } are a type of fruit, and
+  they are delicious.
+  </%def>
+  <%def name="deride(fruit)">
+  ${ fruit } are disgusting, and they
+  are basically inedible.
+  </%def>
+---
+question: The world of fruit
+subquestion: |
+  There are many types of fruit in the
+  world.
+  
+  ${ explain("Peaches") }
+  ${ explain("Oranges") }
+  ${ deride("Strawberries") }
+usedefs:
+ - my_explanation
+mandatory: True

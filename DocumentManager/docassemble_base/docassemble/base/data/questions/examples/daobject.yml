@@ -1,0 +1,25 @@
+metadata:
+  title: DAObject
+  documentation: "https://docassemble.org/docs/objects.html"
+  example start: 1
+  example end: 4
+---
+objects:
+  - park: DAObject
+  - turnip: DAObject
+---
+mandatory: True
+code: |
+  park.front_gate = DAObject()
+---
+mandatory: True
+question: |
+  The ${ turnip.color } turnip sat
+  before the
+  ${ park.front_gate.color } gate.
+---
+generic object: DAObject
+question: |
+  What is the color of the ${ x }?
+fields:
+  - Color: x.color

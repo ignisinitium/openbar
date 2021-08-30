@@ -1,0 +1,59 @@
+metadata:
+  title: Google Map
+  documentation: "https://docassemble.org/docs/functions.html#map_of"
+  example start: 1
+  example end: 4
+---
+objects:
+  - user: Individual
+  - enemy: Individual
+---
+initial: True
+code: |
+  set_info(user=user, role='user')
+  track_location = user.location.status()
+---
+mandatory: True
+code: |
+  need(welcome_screen, user.address.address, enemy.name.first, enemy.address.address, map_shown)
+---
+event: map_shown
+question: Map of you and your enemy
+subquestion: |
+  ${ map_of(user, enemy) }
+---
+field: welcome_screen
+question: Welcome to the map tester
+subquestion: |
+  If you are asked for your location, please give your consent.
+---
+generic object: Individual
+question: |
+  What is ${ x.object_possessive('name') }?
+fields:
+  - First Name: x.name.first
+    default: ${ x.first_name_hint() }
+  - Middle Name: x.name.middle
+    required: False
+  - Last Name: x.name.last
+    default: ${ x.last_name_hint() }
+  - Suffix: x.name.suffix
+    required: False
+    code: |
+      name_suffix()
+---
+generic object: Individual
+question: |
+  Where ${ x.do_question('live') }?
+fields:
+  - Address: x.address.address
+  - Unit: x.address.unit
+    required: False
+    help: The apartment, suite, or unit number of the residence.
+  - City: x.address.city
+  - State: x.address.state
+    code: |
+      us.states.mapping('abbr', 'name')
+  - Zip: x.address.zip
+    required: False
+---

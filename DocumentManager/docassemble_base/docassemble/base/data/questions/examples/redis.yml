@@ -1,0 +1,22 @@
+metadata:
+  title: Using redis
+  example start: 1
+  example end: 3
+  documentation: "https://docassemble.org/docs/functions.html#redis"
+---
+objects:
+  r: DARedis
+---
+mandatory: True
+code: |
+  key = r.key('my_variable')
+  r.set(key, 'hello world')
+---
+mandatory: True
+question: |
+  Value has been retrieved from
+  the redis server.
+subquestion: |
+  The key is `${ key }`.
+  
+  The value is "${ r.get(key).decode() }".

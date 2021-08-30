@@ -1,0 +1,22 @@
+metadata:
+  title: |
+    Selecting "other"
+  documentation: "https://docassemble.org/docs/fields.html#show if"
+---
+question: |
+  What kind of car do you drive?
+fields:
+  - Make: car_make
+    choices:
+      - Honda
+      - Toyota
+      - Mazda
+      - Other
+  - Other make: car_make
+    show if:
+      variable: car_make
+      is: Other
+---
+question: |
+  You drive a ${ car_make }.
+mandatory: True

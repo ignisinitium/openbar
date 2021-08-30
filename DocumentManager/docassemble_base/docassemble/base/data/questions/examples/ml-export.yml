@@ -1,0 +1,9 @@
+metadata:
+  title: Export to JSON
+  documentation: "https://docassemble.org/docs/ml.html#SimpleTextMachineLearner.export_training_set"
+---
+initial: True
+code: |
+  ml = SimpleTextMachineLearner('demo')
+  the_data = ml.export_training_set(output_format='json')
+  response(response=the_data, content_type='application/json')

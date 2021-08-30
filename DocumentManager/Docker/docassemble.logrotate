@@ -1,0 +1,21 @@
+/usr/share/docassemble/log/docassemble.log
+/usr/share/docassemble/log/apache_access.log
+/usr/share/docassemble/log/apache_error.log
+/usr/share/docassemble/log/nginx_access.log
+/usr/share/docassemble/log/nginx_error.log
+/usr/share/docassemble/log/uwsgi.log
+/usr/share/docassemble/log/websockets.log
+/usr/share/docassemble/log/worker.log
+{
+        su www-data www-data
+	create 600 www-data www-data
+	rotate 7
+	maxsize 5M
+	daily
+	missingok
+	notifempty
+	postrotate
+		supervisorctl -s http://localhost:9001 start reset
+		invoke-rc.d syslog-ng reload > /dev/null
+	endscript
+}

@@ -1,0 +1,22 @@
+metadata:
+  title: Bad example 1
+  short title: Bad example 1
+  example start: 1
+  example end: 4
+  documentation: "https://docassemble.org/docs/fields.html#objects"
+---
+include: basic-questions.yml
+---
+question: |
+  What is your favorite date?
+fields:
+  - Greatest Date Ever: favorite_date
+    datatype: date
+    choices:
+      - ${ client.birthdate }
+      - ${ advocate.birthdate }
+---
+question: |
+  The best day in the history of
+  the world was ${ favorite_date }.
+mandatory: True

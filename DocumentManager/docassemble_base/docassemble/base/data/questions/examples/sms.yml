@@ -1,0 +1,30 @@
+metadata:
+  title: SMS interface
+  short title: SMS
+  documentation: "https://docassemble.org/docs/sms.html"
+  example start: 1
+  example end: 3
+---
+question: |
+  Hello, world!
+subquestion: |
+  Are you doing well?
+yesno: doing_well
+---
+terms:
+  world: |
+    A planet.
+---
+mandatory: True
+question: |
+  % if doing_well:
+  Glad to hear that!
+  % else:
+  Sorry to hear that!
+  % endif
+attachment:
+  content: |
+    Hello world!
+  valid formats:
+    - pdf
+  

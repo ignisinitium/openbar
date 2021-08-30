@@ -1,0 +1,539 @@
+role_event:
+  doc: |
+    This is a dummy variable that docassemble looks for during
+    multi-user interviews when the role needed to answer the next
+    question is different from the current role.
+  show: True
+  iterable: False
+role_needed:
+  doc: |
+    This is an internal variable that docassemble uses during
+    multi-user interviews.  It should only be used within role_event
+    questions.  It will be set to a list of roles that are needed to
+    answer the next question.
+  type: list
+  show: True
+  iterable: True
+url_args:
+  doc: |
+    This is a special variable used by docassemble to store the
+    parameters passed to the interview through the URL.
+  type: dict
+  iterable: True
+  show: True
+session_local:
+  doc: |
+    This is a special variable that can be used to store data that is
+    specific to a particular session of the browser within the interview
+    session.
+  type: DASessionLocal
+  iterable: False
+  show: True
+device_local:
+  doc: |
+    This is a special variable that can be used to store data that is
+    specific to a particular web browser within the interview session.
+  type: DADeviceLocal
+  iterable: False
+  show: True
+user_local:
+  doc: |
+    This is a special variable that can be used to store data that is
+    specific to a particular user within the interview session.
+  type: DAUserLocal
+  iterable: False
+  show: True
+nav:
+  doc: |
+    This is a special variable used by docassemble to store 
+    information about the sections of the interview, if the
+    interview makes use of the navigation bar feature.
+  type: DANav
+  show: True
+  iterable: False
+role:
+  doc: |
+    This is a special variable used in multi-user interviews to indicate
+    the role of the current user.  Typically set during initial code.
+  type: str
+  show: True
+  iterable: False
+speak_text:
+  doc: |
+    This is a special variable that can be set during an interview.  If
+    True, the text-to-speech feature is turned on.
+  type: bool
+  show: True
+  iterable: False
+track_location:
+  doc: |
+    This is a special variable that can be set during an interview.  If
+    True, the web application will attempt to determine the user's location
+    using the GPS features of the browser.
+  type: bool
+  show: True
+  iterable: False
+allow_cron:
+  doc: |
+    This is a special variable that can be set during an interview.  If
+    True, the scheduled tasks system will be enabled for the interview.
+  type: bool
+  show: True
+  iterable: False
+multi_user:
+  doc: |
+    This is a special variable that can be set during an interview.  If
+    True, the multi-user interview feature will be turned on.
+  type: bool
+  show: True
+  iterable: False
+menu_items:
+  doc: |
+    This is a special variable that can be set during an interview in
+    order to add selections to the menu.
+  type: list
+  iterable: True
+  show: True
+"True":
+  doc: |
+    This is a built-in Python variable that expresses the boolean value of true.
+  type: bool
+  iterable: False
+"False":
+  doc: |
+    This is a built-in Python variable that expresses the boolean value of false.
+  type: bool
+  iterable: False
+"None":
+  doc: |
+    This is a built-in Python variable that expresses a variable that exists but that lacks a value.
+  type: NoneType
+  iterable: False
+Exception:
+  doc: |
+    This is a built-in Python class that represents an exception.
+  iterable: False
+loop:
+  doc: |
+    This is a variable that can be used inside of Mako for loops.
+  iterable: False
+x:
+  doc: |
+    This is a special variable that is used in generic object questions.
+  iterable: False
+i:
+  doc: |
+    This is a special variable that is used in questions that populate lists.
+  iterable: False
+j:
+  doc: |
+    This is a special variable that is used in questions that populate lists.
+  iterable: False
+k:
+  doc: |
+    This is a special variable that is used in questions that populate lists.
+  iterable: False
+l:
+  doc: |
+    This is a special variable that is used in questions that populate lists.
+  iterable: False
+m:
+  doc: |
+    This is a special variable that is used in questions that populate lists.
+  iterable: False
+n:
+  doc: |
+    This is a special variable that is used in questions that populate lists.
+  iterable: False
+list:
+  exclude: true
+  doc: |
+    This is a built-in Python data type that expresses an ordered list of things.
+dict:
+  exclude: true
+  doc: |
+    This is a built-in Python data type that expresses a dictionary or hash data structure.
+str:
+  exclude: true
+  doc: |
+    This is a built-in Python function that converts an expression to a string.
+  insert: "str()"
+len:
+  doc: |
+    This is a built-in Python function that returns the length of a list or other data structure.
+  insert: "len()"
+sorted:
+  doc: |
+    This is a built-in Python function that sorts a list in alphabetical order.
+  insert: "sorted()"
+map:
+  exclude: true
+  doc: |
+    This is a built-in Python function that applies a function to each member of a list and returns a list.
+  insert: "map()"
+abs:
+  exclude: true
+  doc: |
+    This is a built-in Python function that returns the absolute value of a number.
+  insert: "abs()"
+all:
+  exclude: true
+  doc: |
+    This is a built-in Python function that returns True if all the values of a given list are True.
+  insert: "all()"
+any:
+  exclude: true
+  doc: |
+    This is a built-in Python function that returns True if any of the values of a given list are True.
+  insert: "any()"
+basestring:
+  exclude: true
+  doc: |
+    This is a built-in Python type.
+bin:
+  exclude: true
+  doc: |
+    This is a built-in Python function that converts an integer to a binary string.
+  insert: "bin()"
+bool:
+  exclude: true
+  doc: |
+    This is a built-in Python function that returns True or False depending on whether the argument evaluates to true or false.
+  insert: "bool()"
+bytearray:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "bytearray()"
+callable:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "callable()"
+chr:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "chr()"
+classmethod:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "classmethod()"
+cmp:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "cmp()"
+compile:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "compile()"
+complex:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "complex()"
+delattr:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "delattr()"
+dir:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "dir()"
+divmod:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "divmod()"
+enumerate:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "enumerate()"
+eval:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "eval()"
+execfile:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "execfile()"
+file:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "file()"
+filter:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "filter()"
+float:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "float()"
+format:
+  doc: |
+    This is a built-in Python function.
+  insert: "format()"
+frozenset:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "frozenset()"
+getattr:
+  doc: |
+    This is a built-in Python function.
+  insert: "getattr()"
+globals:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "globals()"
+hasattr:
+  doc: |
+    This is a built-in Python function.
+  insert: "hasattr()"
+hash:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "hash()"
+help:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "help()"
+hex:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "hex()"
+id:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "id()"
+input:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "input()"
+int:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "int()"
+isinstance:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "isinstance()"
+issubclass:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "issubclass()"
+iter:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "iter()"
+locals:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "locals()"
+long:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "long()"
+memoryview:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "memoryview()"
+min:
+  doc: |
+    This is a built-in Python function.
+  insert: "min()"
+max:
+  doc: |
+    This is a built-in Python function.
+  insert: "min()"
+next:
+  exclude: true
+  doc: |
+    This is a built-in Python statement.
+object:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "object()"
+oct:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "oct()"
+open:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "open()"
+ord:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "ord()"
+pow:
+  doc: |
+    This is a built-in Python function.
+  insert: "pow()"
+print:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "print()"
+property:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "property()"
+range:
+  doc: |
+    This is a built-in Python function.
+  insert: "range()"
+raw_input:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "raw_input()"
+reduce:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "reduce()"
+reload:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "reload()"
+repr:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "repr()"
+reversed:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "reversed()"
+round:
+  doc: |
+    This is a built-in Python function.
+  insert: "round()"
+set:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "set()"
+setattr:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "setattr()"
+slice:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "insert()"
+staticmethod:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "staticmethod()"
+sum:
+  doc: |
+    This is a built-in Python function.
+  insert: "sum()"
+super:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "super()"
+tuple:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "tuple()"
+type:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "type()"
+unichr:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "unichr()"
+unicode:
+  doc: |
+    This is a built-in Python function.
+  insert: "unicode()"
+vars:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "vars()"
+xrange:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "xrange()"
+zip:
+  exclude: true
+  doc: |
+    This is a built-in Python function.
+  insert: "zip()"
+self:
+  exclude: true
+  doc: |
+    This is a built-in Python variable.
+row_item:
+  doc: |
+    This is used to represent a row of a table.
+row_index:
+  doc: |
+    This is used to represent the index number of a row of a table.
+text_type:
+  doc: |
+    This is a compatibility function from the six package.  It should
+    be used in place of unicode() in Python 2 code, for compatibility
+    with Python 3.
+string_types:
+  doc: |
+    This is a compatibility function from the six package.  It refers to
+    a collection of string classes.  It should be used in place of
+    basestring in Python 2 code, for compatibility with Python 3.
+PY2:
+  doc: |
+    This is true if Python 2 is being used.
+json:
+  doc: |
+    This is a standard Python module for converting to and from JSON.
+re:
+  doc: |
+    This is a standard Python module for using regular expressions.
+chain:
+  doc: |
+    This is a function from the itertools package that is useful for
+    concatenating generators.

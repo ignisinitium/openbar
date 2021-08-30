@@ -1,0 +1,54 @@
+metadata:
+  title: Empty object checkboxes
+  short title: Empty
+  documentation: "https://docassemble.org/docs/fields.html#object_checkboxes"
+  example start: 1
+  example end: 4
+---
+objects:
+  protagonist: Individual
+  antagonist: Individual
+---
+code: |
+  if choices_should_be_empty:
+    the_choices = []
+  else:
+    the_choices = [protagonist, antagonist]
+---
+mandatory: True
+code: |
+  protagonist.name.first = "Harry"
+  protagonist.name.last = "Potter"
+  antagonist.name.first = "Tom"
+  antagonist.name.last = "Riddle"
+---
+question: |
+  Please answer this.
+fields:
+  - Favorite fruit: favorite_fruit
+  - no label: villain
+    datatype: object_checkboxes
+    choices: the_choices
+---
+mandatory: True
+question: |
+  % if villain.number() == 0:
+  There are no villains here.
+  % else:
+  The ${ villain.as_noun() }
+  ${ villain.does_verb("include") }
+  ${ villain }.
+  % endif
+  % if len(the_choices) == 0:
+  In fact, no villains ever existed.
+  % endif
+subquestion: |
+  Your favorite fruit is
+  ${ favorite_fruit }.
+buttons:
+  - Restart: restart
+---
+question: |
+  Should the list of choices for the
+  `object_checkboxes` field be empty?
+yesno: choices_should_be_empty

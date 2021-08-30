@@ -1,0 +1,111 @@
+debug: True
+enable playground: True
+allow demo: True
+exitpage: https://docassemble.org
+db:
+  prefix: {{DBPREFIX}}
+  name: {{DBNAME}}
+  user: {{DBUSER}}
+  password: {{DBPASSWORD}}
+  host: {{DBHOST}}
+  port: {{DBPORT}}
+  table prefix: {{DBTABLEPREFIX}}
+  backup: {{DBBACKUP}}
+oauth:
+  facebook:
+    enable: False
+    id: 423759825983740
+    secret: 34993a09909c0909b9000a090d09f099
+  google:
+    enable: False
+    id: 23123018240-32239fj28fj4fuhf394h3984eurhfurh.apps.googleusercontent.com
+    secret: DGE34gdgerg3GDG545tgdfRf
+  auth0:
+    enable: False
+    id: ceyd6imTYxTNmuj2CYpwH_cEhdWt93e6
+    secret: LLGEBDrrgDFDfBsFjErsdSdsntkrtAbfa4ee3ss_adfdSDFEWEsfgHTerjNsd3dD
+    domain: example.auth0.com
+  keycloak:
+    enable: False
+    id: ceyd6imTYxTNmuj2CYpwH_cEhdWt93e6
+    secret: LLGEBDrrgDFDfBsFjErsdSdsntkrtAbfa4ee3ss_adfdSDFEWEsfgHTerjNsd3dD
+    domain: keycloak.example.com
+    realm: default
+  twitter:
+    enable: False
+    id: Iweh63ReKfOCttaUBE3t27TET
+    secret: hfieegGgrht5re3hfhsRGStYUbDDAgerergrggSDGHtrErE7rf
+  azure:
+    enable: False
+    id: e378beb1-0bfb-45bc-9b4b-604dcf640c87
+    secret: UwHEze20pzSO+lvywJOjcos3v7Kd6Y7tsaCYTG7Panc=
+  github:
+    enable: False
+    id: ba45316c5951436328bc
+    secret: 68e37cebd352f1ea36b6147cd52ff661c413f4b1
+secretkey: {{DASECRETKEY}}
+backup days: {{DABACKUPDAYS}}
+default title: docassemble
+default short title: doc
+mail:
+  username: null
+  password: null
+  server: localhost
+  default sender: '"Administrator" <no-reply@example.com>'
+server administrator email: {{SERVERADMIN}}
+default interview: docassemble.base:data/questions/default-interview.yml
+language: en
+locale: en_US.utf8
+os locale: {{LOCALE}}
+timezone: {{TIMEZONE}}
+redis: {{REDIS}}
+rabbitmq: {{RABBITMQ}}
+celery processes: {{DACELERYWORKERS}}
+voicerss:
+  enable: False
+  key: ae8734983948ebc98239e9898f998432
+  languages:
+    en: us
+    es: mx
+    fr: fr
+s3:
+  enable: {{S3ENABLE}}
+  access key id: {{S3ACCESSKEY}}
+  secret access key: {{S3SECRETACCESSKEY}}
+  bucket: {{S3BUCKET}}
+  region: {{S3REGION}}
+  endpoint url: {{S3ENDPOINTURL}}
+azure:
+  enable: {{AZUREENABLE}}
+  account name: {{AZUREACCOUNTNAME}}
+  account key: {{AZUREACCOUNTKEY}}
+  container: {{AZURECONTAINER}}
+collect statistics: {{COLLECTSTATISTICS}}
+kubernetes: {{KUBERNETES}}
+ec2: {{EC2}}
+log server: {{LOGSERVER}}
+use cloud urls: {{USECLOUDURLS}}
+use minio: {{USEMINIO}}
+use https: {{USEHTTPS}}
+use lets encrypt: {{USELETSENCRYPT}}
+lets encrypt email: {{LETSENCRYPTEMAIL}}
+behind https load balancer: {{BEHINDHTTPSLOADBALANCER}}
+xsendfile: {{XSENDFILE}}
+update on start: {{DAUPDATEONSTART}}
+allow updates: {{DAALLOWUPDATES}}
+url root: {{URLROOT}}
+external hostname: {{DAHOSTNAME}}
+expose websockets: {{DAEXPOSEWEBSOCKETS}}
+websockets ip: {{DAWEBSOCKETSIP}}
+websockets port: {{DAWEBSOCKETSPORT}}
+root: {{POSTURLROOT}}
+words:
+  - docassemble.base:data/sources/us-words.yml
+allow non-idempotent questions: False
+restrict input variables: True
+web server: {{DAWEBSERVER}}
+new markdown to docx: True
+stable version: {{DASTABLEVERSION}}
+sql ping: {{DASQLPING}}
+default icons: font awesome
+config from: {{CONFIGFROM}}

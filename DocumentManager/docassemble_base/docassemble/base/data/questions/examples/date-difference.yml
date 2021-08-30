@@ -1,0 +1,23 @@
+metadata:
+  title: Difference between dates
+  example start: 1
+  example end: 2
+  documentation: "https://docassemble.org/docs/functions.html#date_difference"
+---
+code: |
+  birthday = as_datetime('5/17/2016')
+  christmas = as_datetime('12/25/2016')
+  interval = date_difference(starting=birthday, ending=christmas)
+---
+question: |
+  The length of time between my
+  birthday and Christmas can be
+  described several ways.
+subquestion: |
+  * ${ interval.weeks } weeks
+  * ${ interval.days } days
+  * ${ interval.hours } hours
+  * ${ interval.minutes } minutes
+  * ${ interval.seconds } seconds
+mandatory: True
+  

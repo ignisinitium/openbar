@@ -1,0 +1,23 @@
+metadata:
+  title: Yes/no radio buttons
+  short title: Yes/no radio buttons
+  documentation: "https://docassemble.org/docs/fields.html#fields yesnoradio"
+---
+question: |
+  Please provide the following information.
+fields:
+  - "Do you like apricots?": likes_apricots
+    datatype: yesnoradio
+  - "Do you like pineapple?": dislikes_pineapple
+    datatype: noyesradio
+---
+question: |
+  Thank you for that information.
+subquestion: |
+  % if likes_apricots:
+  You like apricots.
+  % endif
+  % if dislikes_pineapple:
+  You do not like pineapple.
+  % endif
+mandatory: True

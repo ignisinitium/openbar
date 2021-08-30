@@ -1,0 +1,34 @@
+metadata:
+  title: Table block
+  short title: Table
+  documentation: "https://docassemble.org/docs/initial.html#table"
+  example start: 4
+  example end: 5
+---
+objects:
+  - fruit: DAList
+---
+mandatory: true
+code: |
+  fruit.object_type = Thing
+  fruit.appendObject(name="Fruit with an extremely long name because this fruit needs to demonstrate what happens when a table is wide.", seeds=5)
+  fruit.appendObject(name="Grape", seeds=1)
+  fruit.gathered = True
+---
+mandatory: True
+question: |
+  Information about fruit
+subquestion: |
+  Open the attachment to see a table with
+  information about fruit.
+attachment:
+  ${ fruit_table }
+---
+features:
+  table width: 35
+---
+table: fruit_table
+rows: fruit
+columns:
+  - Fruit Name: row_item.name
+  - Seeds: row_item.seeds

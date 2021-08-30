@@ -1,0 +1,26 @@
+metadata:
+  title: Complaint for Child Support
+  short title: Complaint
+  example start: 1
+  example end: 2
+  documentation: "https://docassemble.org/docs/livehelp.html#chat"
+---
+mandatory: True
+code: |
+  set_live_help_status(availability='available', mode='help', partner_roles=['advocate', 'family law'])
+---
+mandatory: True
+question: |
+  What types of support are you seeking?
+fields:
+  - no label: support_types
+    datatype: checkboxes
+    choices:
+      - Child Support
+      - Spousal Support
+---
+mandatory: True
+question: |
+  All done
+subquestion: |
+  Thank you for telling me that information.

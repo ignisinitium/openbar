@@ -1,0 +1,19 @@
+metadata:
+  title: Custom objects from file
+  short title: Import
+  documentation: "https://docassemble.org/docs/functions.html#objects_from_file"
+  example start: 1
+  example end: 2
+---
+code: |
+  fishes = objects_from_file("fishes.yml")
+---
+mandatory: true
+question: |
+  Fish summary
+subquestion: |
+  % for fish in fishes:
+  ${ fish } has
+  ${ fish.scales } scales.
+  
+  % endfor

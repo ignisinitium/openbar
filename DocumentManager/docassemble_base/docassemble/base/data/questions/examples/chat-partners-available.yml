@@ -1,0 +1,15 @@
+metadata:
+  title: Live chat partners
+  documentation: "https://docassemble.org/docs/livehelp.html#chat_partners_available"
+---
+mandatory: True
+question: |
+  Live chat status
+subquestion: |
+  % if chat_partners_available('advocate').help > 0:
+  An advocate is available to assist you.
+  % else:
+  No advocates are available to assist
+  you at this time.
+  % endif
+  

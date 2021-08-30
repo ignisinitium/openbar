@@ -1,0 +1,56 @@
+metadata:
+  title: Title
+  short title: Short title
+  subtitle: Subtitle
+  example start: 4
+  example end: 4
+  documentation: "https://docassemble.org/docs/initial.html#default screen parts"
+---
+mandatory: True
+code: |
+  counter = 0
+---
+initial: True
+code: |
+  counter += 1
+---
+interview help: |
+  This interview demonstrates the
+  `default screen parts` feature.
+---
+default screen parts:
+  under: |
+    You have seen
+    ${ quantity_noun(counter, 'screen') }
+    of this interview so far.
+  help label: |
+    About
+  continue button label: |
+    Go to next step
+  subtitle: |
+    A _groovy_ interview
+  pre: |
+    The text below **does not**
+    constitute legal advice.
+  submit: |
+    Please re-read the question
+    before moving forward.
+  post: |
+    This interview was generously
+    sponsored by Example, Inc.
+  css class: normalquestion
+---
+question: |
+  What is your favorite fruit?
+fields:
+  - Favorite fruit: favorite_fruit
+---
+question: |
+  What is your favorite vegetable?
+fields:
+  - Favorite vegetable: favorite_vegetable
+---
+mandatory: True
+question: |
+  You like ${ favorite_fruit } and
+  ${ favorite_vegetable }.

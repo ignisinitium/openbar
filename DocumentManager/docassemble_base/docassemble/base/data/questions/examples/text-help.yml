@@ -1,0 +1,24 @@
+metadata:
+  title: Help on label
+  documentation: "https://docassemble.org/docs/fields.html#help"
+---
+question: |
+  What are your favorite things to eat?
+subquestion: |
+  If you don't know what a vegetable
+  or fruit is, click the green text.
+fields:
+  - Vegetable: target_variable
+    help: |
+      A plant.
+  - Fruit: other_target_variable
+    help: |
+      The pulpy, edible seed vessels
+      of certain plants.
+---
+question: Result of question
+subquestion: |
+  target_variable is:
+  "${ target_variable }"
+mandatory: True
+

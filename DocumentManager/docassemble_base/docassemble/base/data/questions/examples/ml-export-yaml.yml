@@ -1,0 +1,9 @@
+metadata:
+  title: Export to YAML
+  documentation: "https://docassemble.org/docs/ml.html#SimpleTextMachineLearner.export_training_set"
+---
+initial: True
+code: |
+  ml = SimpleTextMachineLearner(group_id='demo')
+  the_data = ml.export_training_set(output_format='yaml')
+  response(response=the_data, content_type='text/plain')

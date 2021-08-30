@@ -1,0 +1,37 @@
+---
+modules:
+  - docassemble.base.legal
+---
+objects:
+  - asset: FinancialList
+---
+question: |
+  % if asset.number():
+  You have told me about your ${ asset }.
+  Do you have another type of asset?
+  % else:
+  Do you have any assets?
+  % endif
+yesno: asset.there_is_another
+---
+question: |
+  Describe your asset.
+fields:
+  - Description: asset.new_item_name
+  - Value: asset.new_item_value
+    datatype: currency
+---
+mandatory: True
+question: Summary of assets
+subquestion: |
+  % if asset.number():
+  You own the following ${ asset.as_noun() }:
+    
+  % for item in asset:
+  * ${ item }: ${ currency(asset[item]) }
+  % endfor
+
+  Total: ${ currency(asset) }
+  % else:
+  You are broke!
+  % endif

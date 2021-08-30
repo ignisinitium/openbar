@@ -1,0 +1,34 @@
+metadata:
+  title: Document links
+  short title: Links
+  documentation: "https://docassemble.org/docs/documents.html#display"
+  example start: 1
+  example end: 2
+---
+mandatory: True
+question: |
+  This interview is all done.
+subquestion: |
+  To start your case,
+  [download your pleading],
+  print it, and take it
+  to clerk's office at the
+  court.
+
+  ${ complaint }
+
+  If you want to make changes
+  to it first, you can download
+  the [RTF version].
+
+  [download your pleading]: ${ complaint.url_for() }
+  [RTF version]: ${ complaint.rtf.url_for() }
+---
+attachment:
+  filename: complaint
+  name: Complaint
+  variable name: complaint
+  content: |
+    This is a complaint.
+
+    Blah, blah, blah
