@@ -11,7 +11,8 @@ https://www.gofundme.com/f/help-me-take-the-profit-out-of-justice
 Bitcoin 39BF3EhPCc3ZfEHoKYXGF8se28sCJiR2ux      
 Ethereum 0x3228B97Df5F374F79B0e0F6d4C658384CdBB5d04     
 Litecoin MEnuKkq3uwiT5pwrFaHhhPFggeA9Gegd4L     
-
+CashApp $ignisinitium
+PayPal jonathan@legendarysystems.io
  
 https://buy.stripe.com/7sIbJy8jQa2r0YE7ss $5 per month       
 https://buy.stripe.com/00g4h67fMeiHdLq7st $10    
