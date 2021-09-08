@@ -1,0 +1,150 @@
+<?php
+/*
+Template Name: DAC
+*
+get_header();
+?>
+
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main">
+
+      <?php
+
+      // Start the Loop.
+      while ( have_posts() ) :
+        the_post();
+
+        get_template_part( 'template-parts/content/content', 'page' );
+
+        // If comments are open or we have at least one comment, load up the comment template.
+        if ( comments_open() || get_comments_number() ) {
+          comments_template();
+        }
+
+      endwhile; // End the loop.
+      ?>
+
+    </main><!-- #main -->
+  </div><!-- #primary -->
+
+
+<?php
+
+$curl = curl_init();
+
+curl_setopt_array($curl, array(
+  CURLOPT_URL => "https://unogsng.p.rapidapi.com/genres",
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_FOLLOWLOCATION => true,
+  CURLOPT_ENCODING => "",
+  CURLOPT_MAXREDIRS => 10,
+  CURLOPT_TIMEOUT => 30,
+  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+  CURLOPT_CUSTOMREQUEST => "GET",
+  CURLOPT_HTTPHEADER => array(
+    "x-rapidapi-host: unogsng.p.rapidapi.com",
+    "x-rapidapi-key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+  ),
+));
+
+$response = curl_exec($curl);
+$err = curl_error($curl);
+
+curl_close($curl);
+
+if ($err) {
+  echo "cURL Error #:" . $err;
+} else {
+  echo $response;
+}
+
+<?php
+/*
+Template Name: Latest Netflix Releases
+Description: this is a custom page template which will use a third party API
+  to pull a list of up to 100 items released on Netflix within the last 7 days.
+*/
+//This is used to tell the API what we want to retrieve
+$lastWeek = date("Y-m-d",time()-(24*3600*7));
+
+//Show the header of your WordPress site so the page does not look out of place
+get_header();
+?>
+
+  <div id="primary" class="content-area">
+    <main id="main" class="site-main">
+
+      <?php
+      $curl = curl_init();
+
+      curl_setopt_array($curl, array(
+        CURLOPT_URL => "https://unogsng.p.rapidapi.com/search?newdate=$lastWeek&orderby=date&audio=english",
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_ENCODING => "",
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_HTTPHEADER => array(
+          "x-rapidapi-host: unogsng.p.rapidapi.com",
+          "x-rapidapi-key: xxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+        ),
+      ));
+
+      $response = curl_exec($curl);
+      $err = curl_error($curl);
+
+      curl_close($curl);
+
+      if ($err) {
+        if ($debug) echo "cURL Error #:" . $err;
+        else echo "Oops, something went wrong.  Please try again later.";
+      } else {
+        //Create an array of objects from the JSON returned by the API
+        $jsonObj = json_decode($response);
+
+        //Reorder the items so the newest releases are first
+        $newestReleasesFirst = array_reverse($jsonObj->results);
+
+        //Create a simple grid style for the listings
+        $pageCSS = "<style>
+                    .netflix-wrapper{
+                      display:grid;
+                      grid-template-columns: 200px 200px 200px;
+                    }
+                    .show-wrapper{padding:10px;}
+                    </style>";
+
+        //Create the WordPress page content HTML
+        $pageHTML="<h2>Netflix releases since $lastWeek (in English)</h2>";
+        $pageHTML.="<div class='netflix-wrapper'>";
+
+        //Loop through the API results
+        foreach($newestReleasesFirst as $showObj) {
+          //Put each show into an html structure
+          //  Note: if your theme uses bootstrap use responsive classes here
+          $pageHTML.="<div class='show-wrapper'>";
+
+          //Not all items have a 'poster', so in that case use the img field
+          if (!empty($showObj->poster)) $thisImg = $showObj->poster;
+          else $thisImg = $showObj->img;
+
+          //Show the image first to keep the top edge of the grid level
+          $pageHTML.="<img style='max-width:166px;float:left;' src='".$thisImg."' />";
+          $pageHTML.="<h3>".$showObj->title."</h3>";
+          $pageHTML.="<span>added to netflix ".$showObj->titledate."</span>";
+          $pageHTML.="<div style='float:left;'>".$showObj->synopsis."</div>";
+          $pageHTML.="</div>";
+        }
+        $pageHTML.="</div>";
+        echo $pageCSS.$pageHTML;
+      } // end of check for curl error
+      ?>
+
+    </main><!-- #main -->
+  </div><!-- #primary -->
+
+<?php
+//Show the footer of the WordPress site to keep the page in context
+get_footer();
