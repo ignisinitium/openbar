@@ -148,3 +148,9 @@ get_header();
 <?php
 //Show the footer of the WordPress site to keep the page in context
 get_footer();
+
+
+
+curl -I --http http://51.81.84.150/api/list?key=apikey
+
+curl -d key=apikey -d first_name=David -d last_name=Smith http://51.81.84.150/api/user/new
