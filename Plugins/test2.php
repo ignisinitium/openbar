@@ -24,7 +24,7 @@ class doc_connect_widget extends WP_Widget {
       __('doc_connect Widget', 'doc_connect_widget_domain'),
 
       // Widget description
-      array( 'description' => __( 'Show Weather Details in a Widget', 'doc_connect_widget_domain' ), )
+      array( 'description' => __( 'Doc Assemble Data in a Widget', 'doc_connect_widget_domain' ), )
     );
   }
 
@@ -41,7 +41,7 @@ class doc_connect_widget extends WP_Widget {
 
       // This is where you run the code and display the output
       $curl = curl_init();
-      $url = "51.81.84.150";
+      $url = '51.81.84.150/api/user';
 
       curl_setopt_array($curl, array(
         CURLOPT_URL => $url,
@@ -53,8 +53,9 @@ class doc_connect_widget extends WP_Widget {
         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
-          "host:",
-          "key:"
+          //"host:",
+          "key:YwYrv5AqcTYXdEXlZNz32H4hPsD2sbit"//,
+          //"username:admin@admin.com"
         ),
       ));
 
@@ -71,11 +72,11 @@ class doc_connect_widget extends WP_Widget {
         $responseObj = json_decode($response);
 
         //Gather the air quality value and timestamp for the first and last elements
-        $firstName = "<strong>".$responseObj[0]->firstName->value."</strong>";
-        $lastName ="<strong>".$responseObj[0]->lastName->value."</strong>";
+        $firstName = "<strong>".$responseObj[0]->first_name->value."</strong>";
+        $lastName ="<strong>".$responseObj[0]->last_name->value."</strong>";
         //This is the content that gets populated into the widget on your site
         echo "The <a href='www.openbar.dev'>openBar</a> ".
-              "is welcomes $lastName, $firstName and praying this works!<br>";
+              "Welcomes $lastName, $firstName and praying this works!<br>";
       }
 
       echo $args['after_widget'];
