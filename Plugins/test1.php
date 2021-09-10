@@ -1,7 +1,7 @@
 // http://51.81.84.150/api/user/new
 
 $server = http://51.81.84.150/api/
-$apicall = $server + $api[i]
+$apicall = $server + $api()
 
 $apicalls (
 "user/new" ,
